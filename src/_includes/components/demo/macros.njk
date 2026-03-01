@@ -14,7 +14,7 @@
         <div class="demo-theme-content">
             <h3>{{ theme.name }}</h3>
             <p>{{ theme.description }}</p>
-            <a href="./?theme={{ theme.slug }}" class="demo-theme-link">Preview Theme</a>
+            <a href="{{ '/demo/' | url }}?theme={{ theme.slug }}" class="demo-theme-link">Preview Theme</a>
         </div>
     </article>
 {% endmacro %}

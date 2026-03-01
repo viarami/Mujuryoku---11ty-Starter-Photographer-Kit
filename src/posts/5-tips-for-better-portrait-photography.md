@@ -1,5 +1,5 @@
 ---
-title: "5 Tips for Better Portrait Photography"
+title: "5 Tips for Portraits"
 date: 2024-01-20
 tags: ["tips", "portrait", "tutorial"]
 featured_image: /assets/images/blog-2.jpg

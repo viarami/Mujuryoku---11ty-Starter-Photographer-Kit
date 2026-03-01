@@ -7,6 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
     return themeClass ? themeClass.replace("-theme", "") : "swiss";
   }
 
+  function getThemeFromQuery() {
+    const params = new URLSearchParams(window.location.search);
+    const theme = params.get("theme");
+    return theme ? theme.toLowerCase() : null;
+  }
+
   function createThemeSwitcher() {
     const themeSwitcher = document.createElement("div");
     themeSwitcher.className = "theme-switcher";
@@ -123,8 +129,12 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   const currentTheme = getCurrentTheme();
+  const themeFromQuery = getThemeFromQuery();
   const savedTheme = localStorage.getItem(themeStorageKey);
-  if (savedTheme && savedTheme !== currentTheme && themes.includes(savedTheme)) {
+
+  if (themeFromQuery && themes.includes(themeFromQuery)) {
+    applyTheme(themeFromQuery, { persist: true });
+  } else if (savedTheme && savedTheme !== currentTheme && themes.includes(savedTheme)) {
     applyTheme(savedTheme, { persist: false });
   } else {
     setActiveOption(currentTheme);

@@ -1,5 +1,5 @@
 ---
-title: "Welcome to My Photography Blog"
+title: "Welcome to My Blog"
 date: 2024-01-15
 tags: ["announcement", "photography"]
 featured_image: /assets/images/blog-1.jpg

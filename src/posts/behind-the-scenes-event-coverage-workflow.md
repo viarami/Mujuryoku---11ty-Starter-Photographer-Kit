@@ -1,5 +1,5 @@
 ---
-title: "Behind the Scenes: My Event Coverage Workflow"
+title: "Behind the Scenes: My Event Workflow"
 date: 2024-02-10
 tags: ["event", "workflow", "professional"]
 featured_image: /assets/images/portfolio-10.jpg

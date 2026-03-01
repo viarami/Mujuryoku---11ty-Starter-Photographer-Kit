@@ -83,31 +83,6 @@
     </div>
 </section>
 
-<section class="demo-section">
-    <div class="container">
-        {% uiSectionHeader demo.sections.media.title, demo.sections.media.description, "demo-section-header" %}
-        <div class="demo-media-grid">
-            {% if demo.mediaGallery.length %}
-                {% for mediaItem in demo.mediaGallery %}
-                    <figure class="demo-media-card">
-                        {% responsiveImage
-                            mediaItem.src,
-                            mediaItem.alt,
-                            "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        %}
-                        <figcaption>{{ mediaItem.category }}</figcaption>
-                    </figure>
-                {% endfor %}
-            {% else %}
-                <article class="demo-media-empty">
-                    <h3>No extra demo images found</h3>
-                    <p>Add files to <code>demo-images/</code> and this section will populate automatically.</p>
-                </article>
-            {% endif %}
-        </div>
-    </div>
-</section>
-
 <section class="demo-section demo-section-alt">
     <div class="container">
         {% uiSectionHeader demo.sections.structure.title, demo.sections.structure.description, "demo-section-header" %}
