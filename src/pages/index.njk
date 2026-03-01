@@ -34,7 +34,7 @@ eleventyNavigation:
                 </div>
             </div>
             <div class="hero-image">
-                <img src="/assets/images/hero.jpg" alt="Photography portfolio showcase" loading="eager">
+                {% responsiveImage "/assets/images/hero.jpg", "Photography portfolio showcase", "(max-width: 768px) 100vw, 50vw", { loading: "eager" } %}
             </div>
         </div>
     </div>
@@ -52,7 +52,7 @@ eleventyNavigation:
             {% for item in portfolio.items | slice(0, 6) %}
                 <div class="gallery-item">
                     <a href="/portfolio/" class="gallery-link">
-                        <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy">
+                        {% responsiveImage item.image, item.title, "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" %}
                         <div class="gallery-overlay">
                             <span class="gallery-title">{{ item.title }}</span>
                         </div>
@@ -72,7 +72,7 @@ eleventyNavigation:
     <div class="container">
         <div class="about-content">
             <div class="about-image">
-                <img src="/assets/images/photographer.jpg" alt="Photographer portrait" loading="lazy">
+                {% responsiveImage "/assets/images/photographer.jpg", "Photographer portrait", "(max-width: 768px) 100vw, 50vw" %}
             </div>
             <div class="about-text">
                 <h2 class="about-title">About the Photographer</h2>

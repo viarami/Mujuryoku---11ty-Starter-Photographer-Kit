@@ -67,7 +67,11 @@
         <div class="demo-media-grid">
             {% for mediaItem in demo.mediaGallery %}
                 <figure class="demo-media-card">
-                    <img src="{{ mediaItem.src }}" alt="{{ mediaItem.alt }}" loading="lazy" decoding="async">
+                    {% responsiveImage
+                        mediaItem.src,
+                        mediaItem.alt,
+                        "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    %}
                     <figcaption>{{ mediaItem.category }}</figcaption>
                 </figure>
             {% endfor %}

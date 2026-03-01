@@ -27,7 +27,11 @@ pagination:
                             <a href="{{ post.url }}" class="blog-card-link">
                                 {% if post.data.featured_image %}
                                     <div class="blog-card-image">
-                                        <img src="{{ post.data.featured_image }}" alt="{{ post.data.title }}" loading="lazy">
+                                        {% responsiveImage
+                                            post.data.featured_image,
+                                            post.data.title,
+                                            "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        %}
                                     </div>
                                 {% endif %}
 

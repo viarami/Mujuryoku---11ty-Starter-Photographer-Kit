@@ -28,12 +28,7 @@ eleventyNavigation:
             {% for item in portfolio.items %}
                 <div class="portfolio-item" data-category="{{ item.category }}" data-index="{{ loop.index0 }}">
                     <a href="#" class="portfolio-link" data-index="{{ loop.index0 }}" data-src="{{ item.image }}">
-                        <img src="{{ item.image }}"
-                                 alt="{{ item.title }}"
-                                 loading="lazy" 
-                                 decoding="async"
-                                 class="gallery-image"
-                                 data-index="{{ loop.index0 }}">
+                        {% galleryImage item.image, item.title, loop.index0 %}
                         <div class="portfolio-overlay">
                             <span class="portfolio-item-title">{{ item.title }}</span>
                             <span class="portfolio-item-category">{{ item.description }}</span>
@@ -155,12 +150,24 @@ eleventyNavigation:
                 .querySelectorAll('source');
             let highResSrc = originalSrc;
 
-            // If we have sources, construct the high-res URL (2000px width)
+            // If we have sources, use the largest generated AVIF/WebP/JPEG candidate.
             if (sources.length > 0) {
-                const baseName = originalSrc
-                    .replace('/assets/images/', '')
-                    .replace('.jpg', '');
-                highResSrc = `/assets/images/optimized/${baseName}-2000.jpeg`;
+                const sourceWithSrcset = Array
+                    .from(sources)
+                    .find(source => source.srcset && source.srcset.trim());
+
+                if (sourceWithSrcset) {
+                    const srcsetEntries = sourceWithSrcset
+                        .srcset
+                        .split(',')
+                        .map(entry => entry.trim())
+                        .filter(Boolean);
+
+                    const largestEntry = srcsetEntries[srcsetEntries.length - 1];
+                    if (largestEntry) {
+                        highResSrc = largestEntry.split(/\s+/)[0];
+                    }
+                }
             }
 
             lightboxImage.src = highResSrc;

@@ -23,6 +23,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -34,7 +37,7 @@ jobs:
 
       - name: Build Eleventy site
         env:
-          SITE_BASE_PATH: /mujuryoku
+          SITE_BASE_PATH: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && '/' || format('/{0}', github.event.repository.name) }}
           DEMO_SITE: "true"
         run: npm run build
 

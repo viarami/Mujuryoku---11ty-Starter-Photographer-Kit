@@ -11,7 +11,7 @@ eleventyNavigation:
         <div class="container">
             <div class="about-hero-content">
                 <div class="about-hero-image">
-                    <img src="/assets/images/photographer.jpg" alt="Photographer portrait" loading="eager">
+                    {% responsiveImage "/assets/images/photographer.jpg", "Photographer portrait", "(max-width: 768px) 100vw, 50vw", { loading: "eager" } %}
                 </div>
                 <div class="about-hero-text">
                     <h1 class="about-hero-title">About Me</h1>
@@ -125,7 +125,7 @@ eleventyNavigation:
                 </div>
 
                 <div class="equipment-image">
-                    <img src="/assets/images/equipment.jpg" alt="Photography equipment" loading="lazy">
+                    {% responsiveImage "/assets/images/equipment.jpg", "Photography equipment", "(max-width: 768px) 100vw, 50vw" %}
                 </div>
             </div>
         </div>

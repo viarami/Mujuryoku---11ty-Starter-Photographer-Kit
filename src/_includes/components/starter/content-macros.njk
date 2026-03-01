@@ -2,7 +2,11 @@
     <div class="service-card{% if service.reverse %} service-card-reverse{% endif %}">
         <div class="service-image">
             {% if service.image %}
-                <img src="{{ service.image }}" alt="{{ service.imageAlt or service.title }}" loading="lazy" decoding="async">
+                {% responsiveImage
+                    service.image,
+                    service.imageAlt or service.title,
+                    "(max-width: 768px) 100vw, 50vw"
+                %}
             {% else %}
                 <div class="service-image-placeholder">
                     <span>{{ service.imageLabel }}</span>

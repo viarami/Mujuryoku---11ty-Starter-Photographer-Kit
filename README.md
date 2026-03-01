@@ -1,6 +1,8 @@
 # Mujuryoku - 11ty Photographer Starter Kit
 
-[![Deploy to GitHub Pages](https://github.com/viarami/mujuryoku/actions/workflows/deploy.yml/badge.svg)](https://github.com/viarami/mujuryoku/actions/workflows/deploy.yml)
+[![Deploy to GitHub Pages]](https://github.com/viarami/mujuryoku/actions/workflows/deploy.yml)
+
+**Live demo:** https://viarami.github.io/mujuryoku/
 
 Mujuryoku is a themeable Eleventy (11ty) starter for photography sites.
 

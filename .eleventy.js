@@ -45,6 +45,22 @@ module.exports = function (eleventyConfig) {
     return allowedTones.has(value) ? value : "info";
   }
 
+  function resolveImageInputPath(src = "") {
+    const cleanSrc = String(src).split(/[?#]/)[0];
+    const normalizedSrc = cleanSrc.replace(/^\/+/, "");
+
+    const candidates = [
+      path.join("src", normalizedSrc),
+      normalizedSrc,
+    ];
+
+    if (normalizedSrc.startsWith("assets/demo-images/")) {
+      candidates.push(path.join("demo-images", normalizedSrc.replace(/^assets\/demo-images\//, "")));
+    }
+
+    return candidates.find((candidate) => fs.existsSync(candidate));
+  }
+
   // Plugins
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
 
@@ -119,13 +135,12 @@ module.exports = function (eleventyConfig) {
         return "";
       }
 
-      // Resolve image path relative to the project root
-      const inputPath = path.join("src", src);
+      const inputPath = resolveImageInputPath(src);
       const imageOptions = { ...defaultImageOptions, ...options };
 
       // Check if file exists
-      if (!fs.existsSync(inputPath)) {
-        console.warn(`Image not found: ${inputPath}`);
+      if (!inputPath) {
+        console.warn(`Image not found: ${src}`);
         // Return fallback
         return `<img src="${src}" alt="${alt || ""}" loading="${options.loading || "lazy"}" decoding="async" class="${options.class || ""}">`;
       }
@@ -156,11 +171,11 @@ module.exports = function (eleventyConfig) {
     async function (src, alt, index) {
       if (!src) return "";
 
-      const inputPath = path.join("src", src);
+      const inputPath = resolveImageInputPath(src);
 
       // Check if file exists
-      if (!fs.existsSync(inputPath)) {
-        console.warn(`Gallery image not found: ${inputPath}`);
+      if (!inputPath) {
+        console.warn(`Gallery image not found: ${src}`);
         return `<img src="${src}" alt="${alt || ""}" loading="lazy" decoding="async" class="gallery-image" data-index="${index || ""}">`;
       }
 
@@ -196,13 +211,11 @@ module.exports = function (eleventyConfig) {
     async function (src, alt) {
       if (!src) return "";
 
-      // Handle both absolute and relative paths
-      const imagePath = src.startsWith("/") ? src.slice(1) : src;
-      const inputPath = path.join("src", imagePath);
+      const inputPath = resolveImageInputPath(src);
 
       // Check if file exists
-      if (!fs.existsSync(inputPath)) {
-        console.warn(`Featured image not found: ${inputPath}`);
+      if (!inputPath) {
+        console.warn(`Featured image not found: ${src}`);
         return `<img src="${src}" alt="${alt || ""}" loading="eager" decoding="async" class="featured-image" fetchpriority="high">`;
       }
 
@@ -238,11 +251,11 @@ module.exports = function (eleventyConfig) {
     async function (src, alt) {
       if (!src) return "";
 
-      const inputPath = path.join("src", src);
+      const inputPath = resolveImageInputPath(src);
 
       // Check if file exists
-      if (!fs.existsSync(inputPath)) {
-        console.warn(`Avatar image not found: ${inputPath}`);
+      if (!inputPath) {
+        console.warn(`Avatar image not found: ${src}`);
         return `<img src="${src}" alt="${alt || ""}" loading="lazy" decoding="async" class="avatar-image">`;
       }
 
@@ -277,11 +290,11 @@ module.exports = function (eleventyConfig) {
     async function (src, alt) {
       if (!src) return "";
 
-      const inputPath = path.join("src", src);
+      const inputPath = resolveImageInputPath(src);
 
       // Check if file exists
-      if (!fs.existsSync(inputPath)) {
-        console.warn(`Lightbox image not found: ${inputPath}`);
+      if (!inputPath) {
+        console.warn(`Lightbox image not found: ${src}`);
         return src;
       }
 
@@ -294,9 +307,12 @@ module.exports = function (eleventyConfig) {
       try {
         let metadata = await Image(inputPath, lightboxOptions);
 
-        // Return high-res image URL for lightbox
-        const highRes = metadata.jpeg[metadata.jpeg.length - 1];
-        return highRes.url;
+        // Return the highest-res AVIF URL with fallback chain.
+        const highRes =
+          (metadata.avif && metadata.avif[metadata.avif.length - 1]) ||
+          (metadata.webp && metadata.webp[metadata.webp.length - 1]) ||
+          (metadata.jpeg && metadata.jpeg[metadata.jpeg.length - 1]);
+        return highRes ? highRes.url : src;
       } catch (error) {
         console.warn(`Error processing lightbox image ${src}:`, error.message);
         return src;
@@ -309,10 +325,10 @@ module.exports = function (eleventyConfig) {
     "image",
     async function (src, alt, sizes, options = {}) {
       // Forward to responsiveImage
-      const inputPath = path.join("src", src);
+      const inputPath = resolveImageInputPath(src);
       const imageOptions = { ...defaultImageOptions, ...options };
 
-      if (!fs.existsSync(inputPath)) {
+      if (!inputPath) {
         return `<img src="${src}" alt="${alt || ""}" loading="${options.loading || "lazy"}" decoding="async" class="${options.class || ""}" sizes="${sizes || "100vw"}">`;
       }
 
