@@ -4,9 +4,9 @@
   "description": "Mujuryoku - A modern, themeable 11ty starter kit for photographers",
   "main": "index.js",
   "scripts": {
-    "build": "npx @11ty/eleventy",
-    "dev": "npx @11ty/eleventy --serve --watch",
-    "debug": "DEBUG=Eleventy* npx @11ty/eleventy",
+    "build": "eleventy",
+    "dev": "eleventy --serve --watch",
+    "debug": "DEBUG=Eleventy* eleventy",
     "clean": "rm -rf _site",
     "test": "echo \"No tests yet\""
   },
