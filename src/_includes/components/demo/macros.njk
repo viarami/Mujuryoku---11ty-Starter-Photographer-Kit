@@ -14,7 +14,7 @@
         <div class="demo-theme-content">
             <h3>{{ theme.name }}</h3>
             <p>{{ theme.description }}</p>
-            <a href="/?theme={{ theme.slug }}" class="demo-theme-link">Preview</a>
+            <a href="./?theme={{ theme.slug }}" class="demo-theme-link">Preview Theme</a>
         </div>
     </article>
 {% endmacro %}
@@ -34,6 +34,14 @@
         <div class="demo-page-icon">{{ page.icon }}</div>
         <h3>{{ page.title }}</h3>
         <p>{{ page.description }}</p>
+    </a>
+{% endmacro %}
+
+{% macro resourceCard(resource) %}
+    <a href="{{ resource.href }}" class="demo-resource-card" target="_blank" rel="noopener noreferrer">
+        <div class="demo-resource-icon">{{ resource.icon }}</div>
+        <h3>{{ resource.title }}</h3>
+        <p>{{ resource.description }}</p>
     </a>
 {% endmacro %}
 

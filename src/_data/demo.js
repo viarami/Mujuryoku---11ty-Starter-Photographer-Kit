@@ -2,6 +2,11 @@ const fs = require("fs");
 const path = require("path");
 
 const DEMO_IMAGES_DIRECTORY = path.resolve(__dirname, "../../demo-images");
+const REPOSITORY_URL = "https://github.com/viarami/mujuryoku";
+const README_URL = `${REPOSITORY_URL}#readme`;
+const DEMO_SOURCE_URL = `${REPOSITORY_URL}/tree/main/src/demo`;
+const STARTER_PAGES_URL = `${REPOSITORY_URL}/tree/main/src/pages`;
+const DATA_FILES_URL = `${REPOSITORY_URL}/tree/main/src/_data`;
 
 function toTitleCase(value) {
   return String(value)
@@ -42,73 +47,117 @@ function buildMediaGallery() {
 
 module.exports = {
   seo: {
-    title: "Mujuryoku - 11ty Photographer Starter Demo",
+    title: "Mujuryoku Demo Overview - 11ty Photographer Starter Kit",
     description:
-      "A free, open-source 11ty photography starter kit with six themes, starter pages, and an isolated demo experience.",
+      "Demo overview of a free, open-source 11ty photographer starter kit with six themes, starter pages, and modular demo files.",
     image: "/assets/images/demo-og-image.jpg",
   },
   hero: {
     logo: "Mujuryoku",
-    tagline: "Zero Gravity for your photography website setup.",
+    tagline: "11ty Photographer Starter Kit",
     description:
-      "A free, open-source 11ty starter kit for photographers. Launch quickly, then customize with reusable components.",
+      "A fast, themeable starter for portfolio websites. Use the overview below to inspect features, starter pages, and source structure.",
     badges: [
-      "6 Themes",
-      "Fast Static Site",
-      "Responsive",
-      "Easy To Customize",
       "Open Source",
+      "6 Themes",
+      "Isolated /demo Route",
+      "Responsive Layouts",
+      "Fast Static Output",
     ],
     actions: [
       {
-        label: "View on GitHub",
-        href: "https://github.com/viarami/mujuryoku",
+        label: "View Repository",
+        href: REPOSITORY_URL,
         variant: "primary",
         className: "demo-action-primary",
       },
       {
-        label: "View Starter Pages",
+        label: "Read Setup Guide",
+        href: README_URL,
+        variant: "outline",
+        className: "demo-action-outline",
+      },
+      {
+        label: "Open Portfolio Page",
         href: "/portfolio/",
         variant: "outline",
         className: "demo-action-outline",
       },
     ],
-  },
-  intro: {
-    title: "What is Mujuryoku?",
-    paragraphs: [
-      "Mujuryoku means Zero Gravity. It is designed to remove setup friction so you can focus on publishing your portfolio.",
-      "The starter is built with Eleventy (11ty), Nunjucks templates, and plain CSS for easy onboarding.",
-      "Demo-only templates, styles, and image assets are separated from starter pages so you can keep or remove the demo route cleanly.",
+    jumpLinks: [
+      { label: "Overview", href: "#overview" },
+      { label: "Features", href: "#features" },
+      { label: "Themes", href: "#themes" },
+      { label: "Quick Start", href: "#quickstart" },
+      { label: "Pages", href: "#pages" },
+      { label: "Specs", href: "#specs" },
     ],
-    badgeTitle: "Zero Gravity",
-    badgeText: "Lightweight and Fast",
+  },
+  overview: [
+    {
+      value: "6",
+      label: "Theme Variants",
+      description: "Switch visual direction quickly without changing content files.",
+    },
+    {
+      value: "7",
+      label: "Starter Pages",
+      description: "Core marketing and portfolio pages included out of the box.",
+    },
+    {
+      value: "100%",
+      label: "Static Output",
+      description: "Eleventy generates fast, host-friendly static files.",
+    },
+    {
+      value: "MIT",
+      label: "License",
+      description: "Commercial and personal use with permissive terms.",
+    },
+  ],
+  intro: {
+    title: "What This Demo Shows",
+    paragraphs: [
+      "The demo route is intentionally separate from starter pages so you can remove it without touching your production content.",
+      "Content is data-driven from src/_data, page templates live in src/pages, and demo-only assets stay scoped to src/demo and demo-images.",
+      "Theme previews, starter-page links, and technical notes below are designed as a quick onboarding checklist for new users.",
+    ],
+    badgeTitle: "Architecture",
+    badgeText: "Demo and Starter are cleanly separated",
   },
   sections: {
+    overview: {
+      title: "Overview At a Glance",
+      description: "Key project facts you usually need before cloning or customizing.",
+    },
     features: {
-      title: "Features",
-      description: "Everything needed for a complete photography starter site.",
+      title: "Core Features",
+      description: "Everything needed to launch and iterate on a photography starter site.",
     },
     themes: {
       title: "Theme Showcase",
-      description: "Switch between six visual styles to match your brand.",
+      description: "Preview the six included visual directions.",
     },
     media: {
       title: "Demo Image Library",
       description:
-        "Additional portrait, wedding, and event images integrated for demo presentation.",
+        "Optional media from demo-images/ is automatically listed when files are present.",
+    },
+    structure: {
+      title: "Project Structure",
+      description: "Jump directly to the source folders used most during customization.",
     },
     quickStart: {
       title: "Quick Start",
-      description: "From clone to publish in a few steps.",
+      description: "From clone to local preview in a few steps.",
     },
     pages: {
       title: "Starter Pages",
-      description: "Prebuilt pages included in the kit.",
+      description: "Primary routes included in the starter site.",
     },
     specs: {
       title: "Technical Overview",
-      description: "Core stack and capabilities.",
+      description: "Stack details and implementation notes.",
     },
   },
   features: [
@@ -117,116 +166,149 @@ module.exports = {
       iconClass: "demo-feature-icon-theme",
       title: "Theme Variants",
       description:
-        "Six curated themes out of the box so you can start with a style close to your target look.",
+        "Six curated themes let you choose a strong base style before visual fine-tuning.",
     },
     {
       icon: "RS",
       iconClass: "demo-feature-icon-responsive",
       title: "Responsive Layout",
       description:
-        "Layouts are mobile-first and optimized for desktop, tablet, and phone screens.",
+        "Mobile-first templates scale cleanly from phones to desktop screens.",
     },
     {
       icon: "PF",
       iconClass: "demo-feature-icon-performance",
       title: "Fast Output",
       description:
-        "Static generation with 11ty keeps pages lightweight and quick to load.",
+        "Static generation with Eleventy keeps pages lightweight and easy to host.",
     },
     {
       icon: "SEO",
       iconClass: "demo-feature-icon-seo",
       title: "SEO Ready",
       description:
-        "Starter includes metadata structure and semantic HTML for better discoverability.",
+        "Metadata structure and semantic markup are preconfigured for discoverability.",
     },
     {
       icon: "CMP",
       iconClass: "demo-feature-icon-components",
       title: "Reusable Components",
       description:
-        "Page sections are easier to maintain with componentized Nunjucks templates.",
+        "Nunjucks components reduce duplication and keep section updates predictable.",
     },
     {
       icon: "MD",
       iconClass: "demo-feature-icon-content",
       title: "Markdown Blog",
       description:
-        "Write posts in Markdown and publish automatically in the blog section.",
+        "Create posts in Markdown and publish through the built-in blog listing.",
     },
   ],
   themes: [
     {
       name: "Swiss",
       slug: "swiss",
-      description: "Clean, grid-driven typography for minimal and modern portfolios.",
+      description: "Grid-led typography for clean, modern portfolios.",
       previewClass: "demo-theme-swiss",
       previewLabel: "Grid",
     },
     {
       name: "Bauhaus",
       slug: "bauhaus",
-      description: "Geometric shapes, contrast, and strong compositional blocks.",
+      description: "Geometric composition with strong blocks and contrast.",
       previewClass: "demo-theme-bauhaus",
       previewLabel: "Shapes",
     },
     {
       name: "Dark Bold",
       slug: "dark-bold",
-      description: "High-contrast dark presentation for dramatic visual work.",
+      description: "Dark, high-contrast presentation for dramatic visual work.",
       previewClass: "demo-theme-dark-bold",
       previewLabel: "Contrast",
     },
     {
       name: "Monochrome",
       slug: "monochrome",
-      description: "Black and white aesthetics focused on imagery first.",
+      description: "Monochrome styling that keeps focus on image content.",
       previewClass: "demo-theme-monochrome",
       previewLabel: "Mono",
     },
     {
       name: "Newspaper",
       slug: "newspaper",
-      description: "Editorial style inspired by classic print layouts.",
+      description: "Editorial-inspired style referencing classic print layouts.",
       previewClass: "demo-theme-newspaper",
       previewLabel: "Editorial",
     },
     {
       name: "In Your Face",
       slug: "inyourface",
-      description: "Energetic, loud visuals for bold branding choices.",
+      description: "Energetic visuals for loud, high-impact branding.",
       previewClass: "demo-theme-inyourface",
       previewLabel: "Bold",
     },
   ],
   mediaGallery: buildMediaGallery(),
+  projectStructure: [
+    {
+      title: "Demo Route Source",
+      href: DEMO_SOURCE_URL,
+      icon: "DM",
+      description: "Templates for the isolated demo overview route.",
+    },
+    {
+      title: "Starter Pages",
+      href: STARTER_PAGES_URL,
+      icon: "PG",
+      description: "Production-ready page templates for site content.",
+    },
+    {
+      title: "Data Files",
+      href: DATA_FILES_URL,
+      icon: "DT",
+      description: "Centralized text/content settings and navigation data.",
+    },
+    {
+      title: "README Guide",
+      href: README_URL,
+      icon: "RD",
+      description: "Setup, deployment, and customization documentation.",
+    },
+  ],
   quickStart: {
     steps: [
       {
         title: "Clone Repository",
-        description: "Clone this starter kit to your local machine.",
+        description: "Copy the starter repository to your local machine.",
       },
       {
         title: "Install Dependencies",
-        description: "Run npm install once to fetch dependencies.",
+        description: "Install required packages once with npm.",
       },
       {
         title: "Run Dev Server",
-        description: "Start local development with npm run dev.",
+        description: "Start local development at localhost:8080.",
       },
       {
         title: "Customize Content",
         description:
-          "Edit content files in src/_data and pages in src/pages with minimal template changes.",
+          "Update metadata and content in src/_data, then adjust templates if needed.",
       },
       {
         title: "Build",
-        description: "Generate static output with npm run build.",
+        description: "Generate static output for deployment.",
       },
     ],
+    callout: {
+      title: "Demo Isolation",
+      paragraphs: [
+        "Demo-only source lives in src/demo/, with demo data in src/_data/demo.js and demo styles in src/assets/css/demo.css.",
+        "Starter pages remain in src/pages/, so removing or hosting the demo separately stays straightforward.",
+      ],
+    },
     commandBlock: [
       "# Clone repository",
-      "git clone https://github.com/viarami/mujuryoku.git",
+      `git clone ${REPOSITORY_URL}.git`,
       "",
       "# Enter project",
       "cd mujuryoku",
@@ -243,46 +325,46 @@ module.exports = {
   },
   samplePages: [
     {
-      title: "Home",
-      href: "/",
-      icon: "HM",
-      description: "Hero, featured work, services, and CTA.",
+      title: "Demo Overview",
+      href: "/demo/",
+      icon: "DM",
+      description: "Complete project overview, themes, and setup steps.",
     },
     {
       title: "Portfolio",
       href: "/portfolio/",
       icon: "PF",
-      description: "Filterable project gallery with lightbox.",
+      description: "Image gallery with categories and lightbox behavior.",
     },
     {
       title: "About",
       href: "/about/",
       icon: "AB",
-      description: "Photographer bio and expertise sections.",
+      description: "Photographer story, profile, and experience.",
     },
     {
       title: "Services",
       href: "/services/",
       icon: "SV",
-      description: "Detailed service offerings and process.",
+      description: "Service details and booking process overview.",
     },
     {
       title: "Pricing",
       href: "/pricing/",
       icon: "PR",
-      description: "Package cards and transparent pricing.",
+      description: "Package tiers and pricing comparison cards.",
     },
     {
       title: "Blog",
       href: "/blog/",
       icon: "BG",
-      description: "Markdown posts with paginated listing.",
+      description: "Markdown-based posts with paginated listing.",
     },
     {
       title: "Contact",
       href: "/contact/",
       icon: "CT",
-      description: "Contact details plus Formspree form.",
+      description: "Contact details and starter Formspree integration.",
     },
   ],
   specs: [
@@ -310,31 +392,31 @@ module.exports = {
         { label: "Responsive", value: "Yes" },
         { label: "SEO Meta", value: "Yes" },
         { label: "Open Graph", value: "Yes" },
-        { label: "Structured Data", value: "Yes" },
+        { label: "Structured Data", value: "Included for /demo/" },
       ],
     },
     {
-      title: "License",
+      title: "Project Notes",
       items: [
         { label: "License", value: "MIT" },
         { label: "Codebase", value: "Open Source" },
         { label: "Beginner Friendly", value: "Yes" },
-        { label: "Componentized Demo", value: "Yes" },
+        { label: "Demo Isolation", value: "Separate src/demo route" },
       ],
     },
   ],
   cta: {
-    title: "Ready To Start Building?",
+    title: "Ready To Build Your Version?",
     description:
-      "Use this starter as your base, then remove or keep the isolated demo route as needed.",
+      "Use the starter as your base, then keep or remove the isolated demo route based on your project needs.",
     actions: [
       {
-        label: "Get Started",
-        href: "https://github.com/viarami/mujuryoku",
+        label: "Use Repository",
+        href: REPOSITORY_URL,
         variant: "primary",
       },
       {
-        label: "Browse Portfolio Demo",
+        label: "Open Portfolio",
         href: "/portfolio/",
         variant: "outline",
       },

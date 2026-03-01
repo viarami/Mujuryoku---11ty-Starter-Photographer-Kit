@@ -560,7 +560,7 @@ module.exports = function (eleventyConfig) {
     github: {
       owner: "viarami",
       repository: "mujuryoku",
-      pagesUrl: "https://viarami.github.io/mujuryoku/",
+      pagesUrl: "https://viarami.github.io/Mujuryoku---11ty-Starter-Photographer-Kit",
     },
   });
 

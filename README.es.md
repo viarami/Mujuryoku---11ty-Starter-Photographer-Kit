@@ -45,7 +45,7 @@ El boton esta abajo a la derecha y solo aparece:
 ## GitHub Pages (viarami/mujuryoku)
 
 - Repositorio: `https://github.com/viarami/mujuryoku`
-- URL: `https://viarami.github.io/mujuryoku/`
+- URL: `https://viarami.github.io/Mujuryoku---11ty-Starter-Photographer-Kit`
 - El build usa `SITE_BASE_PATH=/mujuryoku` (ya configurado)
 
 Mas detalles: [README.md](./README.md)

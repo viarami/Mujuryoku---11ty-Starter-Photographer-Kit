@@ -45,7 +45,7 @@ npm run dev
 ## GitHub Pages（viarami/mujuryoku）
 
 - 仓库：`https://github.com/viarami/mujuryoku`
-- 访问地址：`https://viarami.github.io/mujuryoku/`
+- 访问地址：`https://viarami.github.io/Mujuryoku---11ty-Starter-Photographer-Kit`
 - 构建时使用 `SITE_BASE_PATH=/mujuryoku`（工作流已配置）
 
 更多说明请查看：[README.md](./README.md)

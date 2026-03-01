@@ -1,4 +1,4 @@
-{% from "components/demo/macros.njk" import featureCard, themeCard, stepItem, pageCard, specGroup %}
+{% from "components/demo/macros.njk" import featureCard, themeCard, stepItem, pageCard, resourceCard, specGroup %}
 
 <section class="demo-hero">
     <div class="container">
@@ -17,10 +17,32 @@
                 {% uiButton action.label, action.href, action.variant, action.className %}
             {% endfor %}
         </div>
+
+        <nav class="demo-jump-links" aria-label="Overview Sections">
+            {% for jumpLink in demo.hero.jumpLinks %}
+                <a href="{{ jumpLink.href }}" class="demo-jump-link">{{ jumpLink.label }}</a>
+            {% endfor %}
+        </nav>
     </div>
 </section>
 
-<section class="demo-section">
+<section id="overview" class="demo-section">
+    <div class="container">
+        {% uiSectionHeader demo.sections.overview.title, demo.sections.overview.description, "demo-section-header" %}
+
+        <div class="demo-overview-grid">
+            {% for item in demo.overview %}
+                <article class="demo-overview-card">
+                    <p class="demo-overview-value">{{ item.value }}</p>
+                    <h3>{{ item.label }}</h3>
+                    <p>{{ item.description }}</p>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="demo-section demo-section-alt">
     <div class="container">
         <div class="demo-intro">
             <div class="demo-intro-content">
@@ -37,7 +59,7 @@
     </div>
 </section>
 
-<section class="demo-section demo-section-alt">
+<section id="features" class="demo-section">
     <div class="container">
         {% uiSectionHeader demo.sections.features.title, demo.sections.features.description, "demo-section-header" %}
 
@@ -49,7 +71,7 @@
     </div>
 </section>
 
-<section class="demo-section">
+<section id="themes" class="demo-section demo-section-alt">
     <div class="container">
         {% uiSectionHeader demo.sections.themes.title, demo.sections.themes.description, "demo-section-header" %}
 
@@ -61,31 +83,51 @@
     </div>
 </section>
 
-<section class="demo-section demo-section-alt">
+<section class="demo-section">
     <div class="container">
         {% uiSectionHeader demo.sections.media.title, demo.sections.media.description, "demo-section-header" %}
         <div class="demo-media-grid">
-            {% for mediaItem in demo.mediaGallery %}
-                <figure class="demo-media-card">
-                    {% responsiveImage
-                        mediaItem.src,
-                        mediaItem.alt,
-                        "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    %}
-                    <figcaption>{{ mediaItem.category }}</figcaption>
-                </figure>
+            {% if demo.mediaGallery.length %}
+                {% for mediaItem in demo.mediaGallery %}
+                    <figure class="demo-media-card">
+                        {% responsiveImage
+                            mediaItem.src,
+                            mediaItem.alt,
+                            "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        %}
+                        <figcaption>{{ mediaItem.category }}</figcaption>
+                    </figure>
+                {% endfor %}
+            {% else %}
+                <article class="demo-media-empty">
+                    <h3>No extra demo images found</h3>
+                    <p>Add files to <code>demo-images/</code> and this section will populate automatically.</p>
+                </article>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="demo-section demo-section-alt">
+    <div class="container">
+        {% uiSectionHeader demo.sections.structure.title, demo.sections.structure.description, "demo-section-header" %}
+
+        <div class="demo-resources-grid">
+            {% for resource in demo.projectStructure %}
+                {{ resourceCard(resource) }}
             {% endfor %}
         </div>
     </div>
 </section>
 
-<section class="demo-section">
+<section id="quickstart" class="demo-section">
     <div class="container">
         {% uiSectionHeader demo.sections.quickStart.title, demo.sections.quickStart.description, "demo-section-header" %}
 
-        {% uiCallout "Demo Isolation", "tip" %}
-            <p>Demo-only source now lives in <code>src/demo/</code>, demo data in <code>src/_data/demo.js</code>, and demo styles in <code>src/assets/css/demo.css</code>.</p>
-            <p>Starter pages remain in <code>src/pages/</code>, so removing or hosting the demo separately is straightforward.</p>
+        {% uiCallout demo.quickStart.callout.title, "tip" %}
+            {% for paragraph in demo.quickStart.callout.paragraphs %}
+                <p>{{ paragraph }}</p>
+            {% endfor %}
         {% enduiCallout %}
 
         <div class="demo-quickstart">
@@ -102,7 +144,7 @@
     </div>
 </section>
 
-<section class="demo-section">
+<section id="pages" class="demo-section demo-section-alt">
     <div class="container">
         {% uiSectionHeader demo.sections.pages.title, demo.sections.pages.description, "demo-section-header" %}
 
@@ -114,7 +156,7 @@
     </div>
 </section>
 
-<section class="demo-section demo-section-alt">
+<section id="specs" class="demo-section">
     <div class="container">
         {% uiSectionHeader demo.sections.specs.title, demo.sections.specs.description, "demo-section-header" %}
 

@@ -45,7 +45,7 @@ Der Theme-Switcher ist unten rechts und nur aktiv:
 ## GitHub Pages (viarami/mujuryoku)
 
 - Repository: `https://github.com/viarami/mujuryoku`
-- URL: `https://viarami.github.io/mujuryoku/`
+- URL: `https://viarami.github.io/Mujuryoku---11ty-Starter-Photographer-Kit`
 - Build nutzt `SITE_BASE_PATH=/mujuryoku` (bereits in Workflow gesetzt)
 
 Mehr Details: [README.md](./README.md)

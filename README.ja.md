@@ -45,7 +45,7 @@ npm run dev
 ## GitHub Pages（viarami/mujuryoku）
 
 - リポジトリ: `https://github.com/viarami/mujuryoku`
-- 公開URL: `https://viarami.github.io/mujuryoku/`
+- 公開URL: `https://viarami.github.io/Mujuryoku---11ty-Starter-Photographer-Kit`
 - ビルド時に `SITE_BASE_PATH=/mujuryoku` を使用（workflow 設定済み）
 
 詳細: [README.md](./README.md)

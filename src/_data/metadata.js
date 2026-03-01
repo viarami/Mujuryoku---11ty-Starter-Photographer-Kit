@@ -1,7 +1,7 @@
 module.exports = {
   title: "Mujuryoku",
   description: "Mujuryoku - Capturing moments with zero gravity creativity",
-  url: "https://viarami.github.io/mujuryoku/",
+  url: "https://viarami.github.io/Mujuryoku---11ty-Starter-Photographer-Kit",
   author: "viarami",
   email: "hello@viarami.sample",
   social: {

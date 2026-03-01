@@ -45,7 +45,7 @@ Le bouton est en bas a droite et visible seulement:
 ## GitHub Pages (viarami/mujuryoku)
 
 - Depot: `https://github.com/viarami/mujuryoku`
-- URL: `https://viarami.github.io/mujuryoku/`
+- URL: `https://viarami.github.io/Mujuryoku---11ty-Starter-Photographer-Kit`
 - Build avec `SITE_BASE_PATH=/mujuryoku` (deja configure)
 
 Voir aussi: [README.md](./README.md)
