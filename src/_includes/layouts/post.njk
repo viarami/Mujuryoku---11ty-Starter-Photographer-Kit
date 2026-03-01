@@ -1,0 +1,131 @@
+---
+layout: base.njk
+---
+
+<article class="blog-post">
+    <!-- Post Header -->
+    <header class="post-header section">
+        <div class="container">
+            <div class="post-header-content">
+                {% if tags %}
+                    <div class="post-tags">
+                        {% for tag in tags %}
+                            <span class="post-tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <h1 class="post-title">{{ title }}</h1>
+
+                <div class="post-meta">
+                    <time class="post-date" datetime="{{ date | date('yyyy-MM-dd') }}">
+                        {{ date | date('MMMM dd, yyyy') }}
+                    </time>
+
+                    {% if readingTime %}
+                        <span class="post-reading-time">{{ readingTime }} min read</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% if featured_image %}
+            <div class="post-featured-image">
+                {% featuredImage featured_image,
+                title %}
+            </div>
+        {% endif %}
+    </header>
+
+    <!-- Post Content -->
+    <div class="post-content section">
+        <div class="container">
+            <div class="post-content-wrapper">
+                <div class="post-body">
+                    {{ content | safe }}
+                </div>
+
+                <!-- Post Author -->
+                <aside class="post-author">
+                    <div class="author-avatar">
+                        {% avatarImage "/assets/images/photographer.jpg",
+                        metadata.author %}
+                    </div>
+                    <div class="author-info">
+                        <h3 class="author-name">{{ metadata.author }}</h3>
+                        <p class="author-bio">Professional photographer passionate about capturing authentic moments and telling compelling stories through imagery.</p>
+                    </div>
+                </aside>
+
+                <!-- Post Navigation -->
+                <nav class="post-navigation">
+                    {% set previousPost = collections.posts | getPreviousCollectionItem(page) %}
+                    {% set nextPost = collections.posts | getNextCollectionItem(page) %}
+
+                    <div class="post-nav-links">
+                        {% if previousPost %}
+                            <a href="{{ previousPost.url }}" class="post-nav-link post-nav-prev">
+                                <span class="post-nav-label">&larr; Previous Post</span>
+                                <span class="post-nav-title">{{ previousPost.data.title }}</span>
+                            </a>
+                        {% else %}
+                            <div class="post-nav-link post-nav-prev disabled">
+                                <span class="post-nav-label">&larr; Previous Post</span>
+                                <span class="post-nav-title">No previous post</span>
+                            </div>
+                        {% endif %}
+
+                        {% if nextPost %}
+                            <a href="{{ nextPost.url }}" class="post-nav-link post-nav-next">
+                                <span class="post-nav-label">Next Post &rarr;</span>
+                                <span class="post-nav-title">{{ nextPost.data.title }}</span>
+                            </a>
+                        {% else %}
+                            <div class="post-nav-link post-nav-next disabled">
+                                <span class="post-nav-label">Next Post &rarr;</span>
+                                <span class="post-nav-title">No next post</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- Related Posts -->
+{% if collections.posts.length > 1 %}
+    <section class="related-posts section section-muted">
+        <div class="container">
+            <h2 class="section-title">Related Posts</h2>
+
+            <div class="related-posts-grid">
+                {% for relatedPost in collections.posts | reverse | slice(0, 3) %}
+                    {% if relatedPost.url != page.url %}
+                        <article class="related-post-card card">
+                            <a href="{{ relatedPost.url }}" class="related-post-link">
+                                {% if relatedPost.data.featured_image %}
+                                    <div class="related-post-image">
+                                        {% responsiveImage 
+                                                relatedPost.data.featured_image, 
+                                                relatedPost.data.title,
+                                                "(max-width: 768px) 100vw, 33vw",
+                                                { class: "related-post-img" }
+                                            %}
+                                    </div>
+                                {% endif %}
+
+                                <div class="related-post-content">
+                                    <time class="related-post-date" datetime="{{ relatedPost.date | date('yyyy-MM-dd') }}">
+                                        {{ relatedPost.date | date('MMMM dd, yyyy') }}
+                                    </time>
+                                    <h3 class="related-post-title">{{ relatedPost.data.title }}</h3>
+                                </div>
+                            </a>
+                        </article>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endif %}

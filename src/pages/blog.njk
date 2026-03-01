@@ -1,0 +1,128 @@
+---
+title: Blog
+layout: base.njk
+eleventyNavigation:
+  key: Blog
+  order: 5
+pagination:
+  data: collections.posts
+  size: 9
+  alias: posts
+---
+
+{% block content %}
+    <section class="blog-header section">
+        <div class="container">
+            <h1 class="blog-title">Blog</h1>
+            <p class="blog-description">Thoughts, tips, and stories from behind the lens.</p>
+        </div>
+    </section>
+
+    <section class="blog-content section">
+        <div class="container">
+            {% if posts.length > 0 %}
+                <div class="blog-grid">
+                    {% for post in posts %}
+                        <article class="blog-card card">
+                            <a href="{{ post.url }}" class="blog-card-link">
+                                {% if post.data.featured_image %}
+                                    <div class="blog-card-image">
+                                        <img src="{{ post.data.featured_image }}" alt="{{ post.data.title }}" loading="lazy">
+                                    </div>
+                                {% endif %}
+
+                                <div class="blog-card-content">
+                                    <div class="blog-card-meta">
+                                        <time class="blog-card-date" datetime="{{ post.date | date('yyyy-MM-dd') }}">
+                                            {{ post.date | date('MMMM dd, yyyy') }}
+                                        </time>
+
+                                        {% if post.data.tags %}
+                                            <div class="blog-card-tags">
+                                                {% for tag in post.data.tags | slice(0, 3) %}
+                                                    <span class="blog-tag">{{ tag }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <h2 class="blog-card-title">{{ post.data.title }}</h2>
+
+                                    {% if post.data.excerpt %}
+                                        <p class="blog-card-excerpt">{{ post.data.excerpt }}</p>
+                                    {% endif %}
+
+                                    <span class="blog-card-read-more">Read More &rarr;</span>
+                                </div>
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
+
+                <!-- Pagination -->
+                {% if pagination.pages.length > 1 %}
+                    <nav class="pagination" aria-label="Blog pagination">
+                        <div class="pagination-links">
+                            {% if pagination.previous %}
+                                <a href="{{ pagination.previous }}" class="pagination-link pagination-prev">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="15 18 9 12 15 6"></polyline>
+                                    </svg>
+          Previous
+        </a>
+                            {% else %}
+                                <span class="pagination-link pagination-prev disabled">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="15 18 9 12 15 6"></polyline>
+                                    </svg>
+          Previous
+        </span>
+                            {% endif %}
+
+                            <div class="pagination-pages">
+                                {% for page in pagination.pages %}
+                                    <a href="{{ pagination.hrefs[loop.index0] }}" class="pagination-link {% if page == pagination.page %}active{% endif %}">
+                                        {{ loop.index }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+
+                            {% if pagination.next %}
+                                <a href="{{ pagination.next }}" class="pagination-link pagination-next">
+          Next
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                    </svg>
+                                </a>
+                            {% else %}
+                                <span class="pagination-link pagination-next disabled">
+          Next
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                    </svg>
+                                </span>
+                            {% endif %}
+                        </div>
+                    </nav>
+                {% endif %}
+
+            {% else %}
+                <div class="blog-empty">
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                        </div>
+                        <h2 class="empty-title">No Posts Yet</h2>
+                        <p class="empty-description">Blog posts will appear here once they are published. Check back soon!</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

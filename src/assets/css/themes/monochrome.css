@@ -1,0 +1,282 @@
+/* Monochrome Theme CSS - Minimalist Black & White */
+.monochrome-theme {
+    --font-family-primary: "Playfair Display", Georgia, serif;
+    --font-family-secondary: "Source Serif 4", Georgia, serif;
+    --font-family-mono: "JetBrains Mono", monospace;
+    --font-family-ui: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    /* Colors - Strictly Monochrome */
+    --color-background: #ffffff;
+    --color-foreground: #000000;
+    --color-muted: #f5f5f5;
+    --color-muted-foreground: #525252;
+    --color-accent: #000000;
+    --color-accent-foreground: #ffffff;
+    --color-border: #000000;
+    --color-border-light: #e5e5e5;
+    --color-card: #ffffff;
+
+    /* Spacing */
+    --spacing-0: 0;
+    --spacing-1: 0.25rem;
+    --spacing-2: 0.5rem;
+    --spacing-3: 0.75rem;
+    --spacing-4: 1rem;
+    --spacing-5: 1.25rem;
+    --spacing-6: 1.5rem;
+    --spacing-8: 2rem;
+    --spacing-10: 2.5rem;
+    --spacing-12: 3rem;
+    --spacing-16: 4rem;
+    --spacing-24: 6rem;
+    --spacing-32: 8rem;
+    --spacing-40: 10rem;
+
+    /* Radius - Zero everywhere */
+    --radius: 0px;
+
+    /* Shadows - None */
+    --shadow: none;
+
+    /* Transitions */
+    --transition: 100ms ease;
+}
+
+body.monochrome-theme {
+    font-family: var(--font-family-secondary);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    line-height: 1.6;
+}
+
+/* Typography - Elegant Serif */
+.monochrome-theme h1 {
+    font-family: var(--font-family-primary);
+    font-size: clamp(3rem, 9vw, 6.5rem);
+    font-size: clamp(3rem, 9cqw, 6.5rem);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    text-transform: none;
+}
+
+.monochrome-theme h2 {
+    font-family: var(--font-family-primary);
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    font-size: clamp(2rem, 5cqw, 3.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-transform: none;
+}
+
+.monochrome-theme h3 {
+    font-family: var(--font-family-primary);
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-size: clamp(1.4rem, 3cqw, 2.2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    text-transform: none;
+}
+
+.monochrome-theme p {
+    font-family: var(--font-family-secondary);
+    font-size: 1.125rem;
+    line-height: 1.625;
+}
+
+/* Buttons */
+.monochrome-theme .btn {
+    font-family: var(--font-family-ui);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+    border: 2px solid var(--color-foreground);
+    border-radius: var(--radius);
+    padding: var(--spacing-4) var(--spacing-8);
+    font-size: 0.875rem;
+    transition: all var(--transition);
+}
+
+.monochrome-theme .btn:hover {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+}
+
+.monochrome-theme .btn-outline {
+    background-color: transparent;
+    color: var(--color-foreground);
+}
+
+.monochrome-theme .btn-outline:hover {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+}
+
+/* Cards */
+.monochrome-theme .card {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--spacing-6);
+    transition: all var(--transition);
+}
+
+.monochrome-theme .card:hover:not(.card-inverted) {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+    /* Keep nested muted text/tags/metadata readable on inverted hover cards. */
+    --ui-muted-fg: #d6d6d6;
+    --color-gray-100: #3f3f3f;
+    --color-gray-200: #666666;
+    --color-gray-300: #8f8f8f;
+    --color-gray-400: #bdbdbd;
+    --color-gray-500: #d3d3d3;
+    --color-gray-600: #e7e7e7;
+    --color-border: var(--color-background);
+    --color-primary: var(--color-background);
+}
+
+.monochrome-theme .card:hover:not(.card-inverted) a {
+    color: var(--color-background);
+    border-bottom-color: currentColor;
+}
+
+.monochrome-theme .card:hover:not(.card-inverted) .btn {
+    background-color: transparent;
+    color: var(--color-background);
+    border-color: currentColor;
+}
+
+.monochrome-theme .card:hover:not(.card-inverted) .btn:hover {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+}
+
+/* Inverted cards */
+.monochrome-theme .card-inverted {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+    border: none;
+}
+
+.monochrome-theme .card-inverted:hover {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    border: 1px solid var(--color-foreground);
+}
+
+/* Links */
+.monochrome-theme a {
+    color: var(--color-foreground);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border);
+    transition: border-bottom-width 100ms ease;
+}
+
+.monochrome-theme a:hover {
+    border-bottom-width: 2px;
+}
+
+/* Section dividers - Heavy horizontal rules */
+.monochrome-theme .section {
+    border-bottom: 4px solid var(--color-border);
+    padding-bottom: var(--spacing-24);
+}
+
+.monochrome-theme .section:last-child {
+    border-bottom: none;
+}
+
+/* Textures */
+.monochrome-theme .texture-lines {
+    background-image: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 1px,
+            #000 1px,
+            #000 2px);
+    background-size: 100% 4px;
+    opacity: 0.015;
+}
+
+.monochrome-theme .texture-grid {
+    background-image: linear-gradient(#00000008 1px, transparent 1px),
+        linear-gradient(90deg, #00000008 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.015;
+}
+
+/* Line-based visual system */
+.monochrome-theme .hairline {
+    border: none;
+    border-top: 1px solid var(--color-border-light);
+    margin: var(--spacing-8) 0;
+}
+
+.monochrome-theme .rule {
+    border: none;
+    border-top: 2px solid var(--color-border);
+    margin: var(--spacing-8) 0;
+}
+
+.monochrome-theme .rule-thick {
+    border: none;
+    border-top: 4px solid var(--color-border);
+    margin: var(--spacing-8) 0;
+}
+
+.monochrome-theme .rule-ultra {
+    border: none;
+    border-top: 8px solid var(--color-border);
+    margin: var(--spacing-8) 0;
+}
+
+/* Site shell consistency */
+.monochrome-theme .header {
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.monochrome-theme .header .logo-text {
+    font-family: var(--font-family-primary);
+    font-size: clamp(1.9rem, 4vw, 3.2rem);
+    font-size: clamp(1.9rem, 4cqw, 3.2rem);
+    text-transform: none;
+    letter-spacing: -0.02em;
+}
+
+.monochrome-theme .nav-link,
+.monochrome-theme .mobile-nav-link {
+    color: var(--color-foreground);
+    text-decoration: none;
+    border-bottom: 0;
+}
+
+.monochrome-theme .footer {
+    background: rgba(255, 255, 255, 0.94);
+    border-top: 1px solid var(--color-border);
+}
+
+.monochrome-theme .footer-title,
+.monochrome-theme .footer-nav-title,
+.monochrome-theme .footer-social-title {
+    color: var(--color-foreground);
+}
+
+.monochrome-theme .footer-description,
+.monochrome-theme .footer-contact-item,
+.monochrome-theme .footer-nav-link,
+.monochrome-theme .footer-copyright,
+.monochrome-theme .footer-credits {
+    color: #333333;
+}
+
+.monochrome-theme .footer-nav-link,
+.monochrome-theme .footer-contact-item a,
+.monochrome-theme .footer-credits a,
+.monochrome-theme .footer-social-link {
+    text-decoration: none;
+    border-bottom: 0;
+}

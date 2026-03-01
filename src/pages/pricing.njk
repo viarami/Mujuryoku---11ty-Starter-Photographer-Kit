@@ -1,0 +1,65 @@
+---
+title: Pricing
+layout: base.njk
+description: Professional photography pricing for portrait sessions, events, weddings, and commercial projects. Transparent pricing with no hidden fees.
+eleventyNavigation:
+  key: Pricing
+  order: 5
+---
+
+{% from "components/starter/content-macros.njk" import pricingPackageCard, faqItem %}
+
+<section class="pricing-hero section">
+    <div class="container">
+        <h1 class="pricing-title">{{ pricing.hero.title }}</h1>
+        <p class="pricing-description">{{ pricing.hero.description }}</p>
+
+        <div class="pricing-badges">
+            {% for badge in pricing.hero.badges %}
+                {% uiBadge badge %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% for section in pricing.sections %}
+    <section id="{{ section.id }}" class="pricing-content section{% if section.muted %} section-muted{% endif %}">
+        <div class="container">
+            <h2 class="section-title">{{ section.title }}</h2>
+            <div class="pricing-grid grid grid-3">
+                {% for package in section.packages %}
+                    {{ pricingPackageCard(package) }}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endfor %}
+
+<section class="pricing-cta section">
+    <div class="container">
+        <div class="cta-content">
+            <h2 class="cta-title">{{ pricing.cta.title }}</h2>
+            <p class="cta-description">{{ pricing.cta.description }}</p>
+            <div class="cta-buttons">
+                {% for action in pricing.cta.actions %}
+                    {% uiButton action.label, action.href, action.variant %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pricing-faq section section-muted">
+    <div class="container">
+        {% uiSectionHeader pricing.faq.title %}
+        {% uiCallout "Starter Tip", "info" %}
+            <p>Edit packages and FAQ in <code>src/_data/pricing.js</code> so you do not need to touch complex HTML.</p>
+        {% enduiCallout %}
+
+        <div class="faq-grid grid grid-2">
+            {% for item in pricing.faq.items %}
+                {{ faqItem(item) }}
+            {% endfor %}
+        </div>
+    </div>
+</section>

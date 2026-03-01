@@ -1,0 +1,52 @@
+{% macro featureCard(feature) %}
+    <article class="demo-feature-card">
+        <div class="demo-feature-icon {{ feature.iconClass }}">{{ feature.icon }}</div>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+    </article>
+{% endmacro %}
+
+{% macro themeCard(theme) %}
+    <article class="demo-theme-card">
+        <div class="demo-theme-preview {{ theme.previewClass }}">
+            <span class="demo-theme-preview-label">{{ theme.previewLabel }}</span>
+        </div>
+        <div class="demo-theme-content">
+            <h3>{{ theme.name }}</h3>
+            <p>{{ theme.description }}</p>
+            <a href="/?theme={{ theme.slug }}" class="demo-theme-link">Preview</a>
+        </div>
+    </article>
+{% endmacro %}
+
+{% macro stepItem(step, index) %}
+    <div class="demo-step">
+        <div class="demo-step-number">{{ index + 1 }}</div>
+        <div class="demo-step-content">
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.description }}</p>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro pageCard(page) %}
+    <a href="{{ page.href }}" class="demo-page-card">
+        <div class="demo-page-icon">{{ page.icon }}</div>
+        <h3>{{ page.title }}</h3>
+        <p>{{ page.description }}</p>
+    </a>
+{% endmacro %}
+
+{% macro specGroup(group) %}
+    <section class="demo-spec-group">
+        <h3>{{ group.title }}</h3>
+        <ul class="demo-spec-list">
+            {% for item in group.items %}
+                <li>
+                    <span>{{ item.label }}</span>
+                    <span>{{ item.value }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endmacro %}

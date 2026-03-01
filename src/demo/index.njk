@@ -1,0 +1,135 @@
+{% from "components/demo/macros.njk" import featureCard, themeCard, stepItem, pageCard, specGroup %}
+
+<section class="demo-hero">
+    <div class="container">
+        <h1 class="demo-logo">{{ demo.hero.logo }}</h1>
+        <p class="demo-tagline">{{ demo.hero.tagline }}</p>
+        <p class="demo-description">{{ demo.hero.description }}</p>
+
+        <div class="demo-hero-badges">
+            {% for badge in demo.hero.badges %}
+                {% uiBadge badge, "demo-badge" %}
+            {% endfor %}
+        </div>
+
+        <div class="demo-hero-actions">
+            {% for action in demo.hero.actions %}
+                {% uiButton action.label, action.href, action.variant, action.className %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="demo-section">
+    <div class="container">
+        <div class="demo-intro">
+            <div class="demo-intro-content">
+                <h2>{{ demo.intro.title }}</h2>
+                {% for paragraph in demo.intro.paragraphs %}
+                    <p>{{ paragraph }}</p>
+                {% endfor %}
+            </div>
+            <div class="demo-intro-badge">
+                <h3>{{ demo.intro.badgeTitle }}</h3>
+                <p>{{ demo.intro.badgeText }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="demo-section demo-section-alt">
+    <div class="container">
+        {% uiSectionHeader demo.sections.features.title, demo.sections.features.description, "demo-section-header" %}
+
+        <div class="demo-features-grid">
+            {% for feature in demo.features %}
+                {{ featureCard(feature) }}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="demo-section">
+    <div class="container">
+        {% uiSectionHeader demo.sections.themes.title, demo.sections.themes.description, "demo-section-header" %}
+
+        <div class="demo-themes-grid">
+            {% for themeItem in demo.themes %}
+                {{ themeCard(themeItem) }}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="demo-section demo-section-alt">
+    <div class="container">
+        {% uiSectionHeader demo.sections.media.title, demo.sections.media.description, "demo-section-header" %}
+        <div class="demo-media-grid">
+            {% for mediaItem in demo.mediaGallery %}
+                <figure class="demo-media-card">
+                    <img src="{{ mediaItem.src }}" alt="{{ mediaItem.alt }}" loading="lazy" decoding="async">
+                    <figcaption>{{ mediaItem.category }}</figcaption>
+                </figure>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="demo-section">
+    <div class="container">
+        {% uiSectionHeader demo.sections.quickStart.title, demo.sections.quickStart.description, "demo-section-header" %}
+
+        {% uiCallout "Demo Isolation", "tip" %}
+            <p>Demo-only source now lives in <code>src/demo/</code>, demo data in <code>src/_data/demo.js</code>, and demo styles in <code>src/assets/css/demo.css</code>.</p>
+            <p>Starter pages remain in <code>src/pages/</code>, so removing or hosting the demo separately is straightforward.</p>
+        {% enduiCallout %}
+
+        <div class="demo-quickstart">
+            <div class="demo-steps">
+                {% for step in demo.quickStart.steps %}
+                    {{ stepItem(step, loop.index0) }}
+                {% endfor %}
+            </div>
+
+            {% uiTerminal "Quick Start Commands" %}
+{{ demo.quickStart.commandBlock }}
+            {% enduiTerminal %}
+        </div>
+    </div>
+</section>
+
+<section class="demo-section">
+    <div class="container">
+        {% uiSectionHeader demo.sections.pages.title, demo.sections.pages.description, "demo-section-header" %}
+
+        <div class="demo-pages-grid">
+            {% for pageItem in demo.samplePages %}
+                {{ pageCard(pageItem) }}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="demo-section demo-section-alt">
+    <div class="container">
+        {% uiSectionHeader demo.sections.specs.title, demo.sections.specs.description, "demo-section-header" %}
+
+        <div class="demo-specs-grid">
+            {% for specGroupItem in demo.specs %}
+                {{ specGroup(specGroupItem) }}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="demo-cta">
+    <div class="container">
+        <h2>{{ demo.cta.title }}</h2>
+        <p>{{ demo.cta.description }}</p>
+        <div class="demo-cta-actions">
+            {% for action in demo.cta.actions %}
+                {% uiButton action.label, action.href, action.variant %}
+            {% endfor %}
+        </div>
+    </div>
+</section>

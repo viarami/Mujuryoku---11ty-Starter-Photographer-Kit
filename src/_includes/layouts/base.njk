@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% if title %}{{ title }} | {% endif %}{{ metadata.title }}
+        </title>
+        <meta name="description" content="{% if description %}{{ description }}{% else %}{{ metadata.description }}{% endif %}">
+
+        <!-- Theme styles -->
+        <link rel="stylesheet" href="{{ '/assets/css/global.css' | url }}">
+        <link rel="stylesheet" href="{{ '/assets/css/themes/' + theme.current + '.css' | url }}">
+        {% if extraCss %}
+            {% for stylesheet in extraCss %}
+                <link rel="stylesheet" href="{{ stylesheet | url }}">
+            {% endfor %}
+        {% endif %}
+        {% if extraHead %}
+            {{ extraHead | safe }}
+        {% endif %}
+
+        {% block head %}{% endblock %}
+    </head>
+    <body class="{{ theme.current }}-theme{% if bodyClass %} {{ bodyClass }}{% endif %}">
+        {% if showHeader != false %}
+            {% include "components/header.njk" %}
+        {% endif %}
+
+        <main id="main-content">
+            {{ content | safe }}
+        </main>
+
+        {% if showFooter != false %}
+            {% include "components/footer.njk" %}
+        {% endif %}
+
+        {% set isPublishedDemoRoute = page and page.url == '/demo/' %}
+        {% if includeThemeSwitcher != false and (site.isDev or isPublishedDemoRoute) %}
+            <script src="{{ '/assets/js/theme-switcher.js' | url }}"></script>
+        {% endif %}
+        {% if includeTestimonialsScript != false %}
+            <script src="{{ '/assets/js/testimonials.js' | url }}"></script>
+        {% endif %}
+        {% if extraJs %}
+            {% for script in extraJs %}
+                <script src="{{ script | url }}"></script>
+            {% endfor %}
+        {% endif %}
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

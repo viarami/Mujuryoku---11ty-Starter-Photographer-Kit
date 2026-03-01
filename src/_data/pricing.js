@@ -1,0 +1,258 @@
+module.exports = {
+  hero: {
+    title: "Photography Pricing",
+    description:
+      "Transparent pricing for exceptional photography. Choose the package that fits your needs, or contact me for custom quotes.",
+    badges: ["Transparent", "No Hidden Fees", "Custom Packages Available"],
+  },
+  sections: [
+    {
+      id: "portrait-sessions",
+      title: "Portrait Sessions",
+      packages: [
+        {
+          tier: "Basic",
+          price: "$250",
+          duration: "session",
+          cta: { label: "Book Now", href: "/contact/" },
+          features: [
+            { text: "1-hour session", included: true },
+            { text: "1 location", included: true },
+            { text: "15 edited digital images", included: true },
+            { text: "Online gallery", included: true },
+            { text: "Print release", included: true },
+            { text: "High-resolution files", included: false },
+            { text: "Makeup artist", included: false },
+          ],
+        },
+        {
+          tier: "Standard",
+          price: "$450",
+          duration: "session",
+          featured: true,
+          badge: "Most Popular",
+          cta: { label: "Book Now", href: "/contact/" },
+          features: [
+            { text: "2-hour session", included: true },
+            { text: "2 locations", included: true },
+            { text: "30 edited digital images", included: true },
+            { text: "Online gallery", included: true },
+            { text: "Print release", included: true },
+            { text: "High-resolution files", included: true },
+            { text: "Makeup artist", included: false },
+          ],
+        },
+        {
+          tier: "Premium",
+          price: "$750",
+          duration: "session",
+          cta: { label: "Book Now", href: "/contact/" },
+          features: [
+            { text: "3-hour session", included: true },
+            { text: "Unlimited locations", included: true },
+            { text: "50 edited digital images", included: true },
+            { text: "Online gallery", included: true },
+            { text: "Print release", included: true },
+            { text: "High-resolution files", included: true },
+            { text: "Professional makeup artist", included: true },
+          ],
+        },
+      ],
+    },
+    {
+      id: "event-photography",
+      title: "Event Photography",
+      muted: true,
+      packages: [
+        {
+          tier: "Small Events",
+          price: "$400",
+          duration: "4 hours",
+          cta: { label: "Book Now", href: "/contact/" },
+          features: [
+            { text: "Up to 50 guests", included: true },
+            { text: "4-hour coverage", included: true },
+            { text: "1 photographer", included: true },
+            { text: "100+ edited images", included: true },
+            { text: "Online gallery", included: true },
+            { text: "24-hour turnaround", included: true },
+            { text: "Second photographer", included: false },
+          ],
+        },
+        {
+          tier: "Medium Events",
+          price: "$800",
+          duration: "6 hours",
+          featured: true,
+          badge: "Best Value",
+          cta: { label: "Book Now", href: "/contact/" },
+          features: [
+            { text: "Up to 150 guests", included: true },
+            { text: "6-hour coverage", included: true },
+            { text: "1 photographer", included: true },
+            { text: "200+ edited images", included: true },
+            { text: "Online gallery", included: true },
+            { text: "24-hour turnaround", included: true },
+            { text: "Candid moments", included: true },
+          ],
+        },
+        {
+          tier: "Large Events",
+          price: "$1,500",
+          duration: "8 hours",
+          cta: { label: "Book Now", href: "/contact/" },
+          features: [
+            { text: "Unlimited guests", included: true },
+            { text: "8-hour coverage", included: true },
+            { text: "2 photographers", included: true },
+            { text: "400+ edited images", included: true },
+            { text: "Online gallery", included: true },
+            { text: "24-hour turnaround", included: true },
+            { text: "Group portraits", included: true },
+          ],
+        },
+      ],
+    },
+    {
+      id: "commercial-product",
+      title: "Commercial & Product",
+      packages: [
+        {
+          tier: "Starter",
+          price: "$300",
+          duration: "project",
+          cta: { label: "Get Quote", href: "/contact/" },
+          features: [
+            { text: "Up to 10 products", included: true },
+            { text: "White background", included: true },
+            { text: "Basic editing", included: true },
+            { text: "Web-optimized images", included: true },
+            { text: "48-hour turnaround", included: true },
+            { text: "Lifestyle shots", included: false },
+            { text: "Commercial license", included: false },
+          ],
+        },
+        {
+          tier: "Professional",
+          price: "$750",
+          duration: "project",
+          featured: true,
+          badge: "Popular",
+          cta: { label: "Get Quote", href: "/contact/" },
+          features: [
+            { text: "Up to 25 products", included: true },
+            { text: "White + lifestyle backgrounds", included: true },
+            { text: "Advanced editing", included: true },
+            { text: "Web & print optimized", included: true },
+            { text: "48-hour turnaround", included: true },
+            { text: "Basic commercial license", included: true },
+            { text: "Model photography", included: false },
+          ],
+        },
+        {
+          tier: "Enterprise",
+          price: "$1,500+",
+          duration: "project",
+          cta: { label: "Get Quote", href: "/contact/" },
+          features: [
+            { text: "Unlimited products", included: true },
+            { text: "Multiple setups", included: true },
+            { text: "Premium editing", included: true },
+            { text: "Full commercial license", included: true },
+            { text: "24-hour rush available", included: true },
+            { text: "Model & prop sourcing", included: true },
+            { text: "Ongoing contracts", included: true },
+          ],
+        },
+      ],
+    },
+    {
+      id: "wedding-packages",
+      title: "Wedding Packages",
+      muted: true,
+      packages: [
+        {
+          tier: "Elopement",
+          price: "$1,200",
+          duration: "package",
+          cta: { label: "Inquire Now", href: "/contact/" },
+          features: [
+            { text: "4-hour coverage", included: true },
+            { text: "1 photographer", included: true },
+            { text: "100+ edited images", included: true },
+            { text: "Online gallery", included: true },
+            { text: "Print release", included: true },
+            { text: "Digital files", included: true },
+            { text: "Second shooter", included: false },
+          ],
+        },
+        {
+          tier: "Essential",
+          price: "$2,500",
+          duration: "package",
+          featured: true,
+          badge: "Most Popular",
+          cta: { label: "Inquire Now", href: "/contact/" },
+          features: [
+            { text: "8-hour coverage", included: true },
+            { text: "1 photographer", included: true },
+            { text: "300+ edited images", included: true },
+            { text: "Online gallery", included: true },
+            { text: "Print release", included: true },
+            { text: "Highlight video (5 min)", included: true },
+            { text: "Complimentary engagement session", included: true },
+          ],
+        },
+        {
+          tier: "Luxury",
+          price: "$4,500",
+          duration: "package",
+          cta: { label: "Inquire Now", href: "/contact/" },
+          features: [
+            { text: "Full day coverage", included: true },
+            { text: "2 photographers", included: true },
+            { text: "600+ edited images", included: true },
+            { text: "Online gallery", included: true },
+            { text: "Print release", included: true },
+            { text: "Highlight video (10 min)", included: true },
+            { text: "Premium album (20x20)", included: true },
+          ],
+        },
+      ],
+    },
+  ],
+  cta: {
+    title: "Need a Custom Package?",
+    description:
+      "Every project is unique. Contact me to discuss your specific needs and I'll create a custom package tailored to your requirements.",
+    actions: [
+      { label: "Contact Me", href: "/contact/", variant: "primary" },
+      { label: "View Services", href: "/services/", variant: "outline" },
+    ],
+  },
+  faq: {
+    title: "Frequently Asked Questions",
+    items: [
+      {
+        question: "What's included in the session fee?",
+        answer:
+          "All packages include a pre-session consultation, the photography session itself, professional editing of selected images, an online gallery for viewing and sharing, and a print release for personal use. High-resolution files are included in most packages.",
+      },
+      {
+        question: "How long does it take to receive my images?",
+        answer:
+          "Portrait sessions are typically delivered within 1-2 weeks. Event and wedding galleries are delivered within 2-3 weeks. Rush delivery is available upon request for an additional fee.",
+      },
+      {
+        question: "Do you offer payment plans?",
+        answer:
+          "Yes. I offer flexible payment plans for all packages. A 25% deposit is required to secure your booking, with the remaining balance due before or on the day of your session.",
+      },
+      {
+        question: "What is your cancellation policy?",
+        answer:
+          "Deposits are non-refundable but can be transferred to a new date within 12 months if you provide at least 48 hours notice. For weddings, please refer to your contract for full details.",
+      },
+    ],
+  },
+};

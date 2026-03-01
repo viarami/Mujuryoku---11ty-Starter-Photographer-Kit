@@ -1,0 +1,61 @@
+---
+title: Services
+layout: base.njk
+description: Professional photography services including portrait, event, commercial, wedding photography, and expert photo editing. Tailored solutions for every need.
+eleventyNavigation:
+  key: Services
+  order: 6
+---
+
+{% from "components/starter/content-macros.njk" import serviceCard, processStep %}
+
+<section class="services-hero section">
+    <div class="container">
+        <h1 class="services-title">{{ services.hero.title }}</h1>
+        <p class="services-description">{{ services.hero.description }}</p>
+
+        <div class="service-badges">
+            {% for badge in services.hero.badges %}
+                {% uiBadge badge %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% for service in services.items %}
+    <section class="service-detail section{% if service.muted %} section-muted{% endif %}">
+        <div class="container">
+            {{ serviceCard(service) }}
+        </div>
+    </section>
+{% endfor %}
+
+<section class="services-process section section-muted">
+    <div class="container">
+        <h2 class="section-title">{{ services.process.title }}</h2>
+
+        {% uiCallout "Starter Tip", "info" %}
+            <p>Edit this page content in <code>src/_data/services.js</code> instead of changing template HTML.</p>
+        {% enduiCallout %}
+
+        <div class="process-grid grid grid-4">
+            {% for step in services.process.steps %}
+                {{ processStep(step, loop.index0) }}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="services-cta section">
+    <div class="container">
+        <div class="cta-content">
+            <h2 class="cta-title">{{ services.cta.title }}</h2>
+            <p class="cta-description">{{ services.cta.description }}</p>
+            <div class="cta-buttons">
+                {% for action in services.cta.actions %}
+                    {% uiButton action.label, action.href, action.variant %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

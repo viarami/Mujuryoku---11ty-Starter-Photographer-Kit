@@ -1,0 +1,266 @@
+/* Dark Bold Theme CSS - Bold Typography with Dark Mode */
+.dark-bold-theme {
+    --font-family-primary: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-family-secondary: "Playfair Display", Georgia, serif;
+    --font-family-mono: "JetBrains Mono", "Fira Code", monospace;
+
+    /* Colors - Dark Mode */
+    --color-background: #0a0a0a;
+    --color-foreground: #fafafa;
+    --color-muted: #1a1a1a;
+    --color-muted-foreground: #737373;
+    --color-accent: #ff3d00;
+    --color-accent-foreground: #0a0a0a;
+    --color-border: #262626;
+    --color-card: #0f0f0f;
+
+    /* Spacing */
+    --spacing-0: 0;
+    --spacing-1: 0.25rem;
+    --spacing-2: 0.5rem;
+    --spacing-3: 0.75rem;
+    --spacing-4: 1rem;
+    --spacing-5: 1.25rem;
+    --spacing-6: 1.5rem;
+    --spacing-8: 2rem;
+    --spacing-10: 2.5rem;
+    --spacing-12: 3rem;
+    --spacing-16: 4rem;
+    --spacing-20: 5rem;
+    --spacing-24: 6rem;
+    --spacing-32: 8rem;
+    --spacing-40: 10rem;
+
+    /* Radius - No rounded corners */
+    --radius: 0px;
+
+    /* Shadows - None, depth through typography */
+    --shadow: none;
+
+    /* Transitions */
+    --transition: 200ms ease-out;
+}
+
+body.dark-bold-theme {
+    font-family: var(--font-family-primary);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+}
+
+/* Typography - Bold and dramatic */
+.dark-bold-theme h1 {
+    font-size: clamp(2.8rem, 7vw, 5.2rem);
+    font-size: clamp(2.8rem, 7cqw, 5.2rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: var(--spacing-8);
+}
+
+.dark-bold-theme h2 {
+    font-size: clamp(2.1rem, 4.8vw, 3.6rem);
+    font-size: clamp(2.1rem, 4.8cqw, 3.6rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-6);
+}
+
+.dark-bold-theme h3 {
+    font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+    font-size: clamp(1.4rem, 2.8cqw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin-bottom: var(--spacing-4);
+}
+
+.dark-bold-theme p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-muted-foreground);
+}
+
+/* Buttons - Text with underline */
+.dark-bold-theme .btn {
+    font-family: var(--font-family-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background-color: transparent;
+    color: var(--color-accent);
+    border: none;
+    border-radius: var(--radius);
+    padding: var(--spacing-2) 0;
+    font-size: 1rem;
+    position: relative;
+    transition: all 150ms ease;
+}
+
+.dark-bold-theme .btn::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-accent);
+    transform: scaleX(1);
+    transition: transform 150ms ease;
+}
+
+.dark-bold-theme .btn:hover::after {
+    transform: scaleX(1.1);
+}
+
+.dark-bold-theme .btn:active {
+    transform: translateY(1px);
+}
+
+.dark-bold-theme .btn-outline {
+    border: 1px solid var(--color-foreground);
+    color: var(--color-foreground);
+    padding: var(--spacing-3) var(--spacing-6);
+}
+
+.dark-bold-theme .btn-outline:hover {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+}
+
+/* Cards - Minimal */
+.dark-bold-theme .card {
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--spacing-6);
+    transition: border-color 150ms ease;
+}
+
+.dark-bold-theme .card:hover {
+    border-color: var(--color-muted-foreground);
+}
+
+/* Links */
+.dark-bold-theme a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.dark-bold-theme a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+}
+
+/* Section dividers */
+.dark-bold-theme .section {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--spacing-24);
+    padding-bottom: var(--spacing-24);
+}
+
+.dark-bold-theme .section:first-child {
+    border-top: none;
+}
+
+/* Noise texture overlay */
+.dark-bold-theme .noise-overlay {
+    position: relative;
+}
+
+.dark-bold-theme .noise-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.015;
+    pointer-events: none;
+}
+
+/* Site shell consistency */
+.dark-bold-theme .header {
+    background: rgba(10, 10, 10, 0.95);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.dark-bold-theme .header .logo-text {
+    font-family: var(--font-family-primary);
+    font-size: clamp(1.95rem, 4.2vw, 3.2rem);
+    font-size: clamp(1.95rem, 4.2cqw, 3.2rem);
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+}
+
+.dark-bold-theme .nav-link,
+.dark-bold-theme .mobile-nav-link {
+    color: var(--color-foreground);
+    text-decoration: none;
+    border-bottom: 0;
+}
+
+.dark-bold-theme .nav-link:hover,
+.dark-bold-theme .mobile-nav-link:hover {
+    color: var(--color-accent);
+}
+
+.dark-bold-theme .footer {
+    background: #0f0f0f;
+    border-top: 1px solid var(--color-border);
+}
+
+.dark-bold-theme .footer-title,
+.dark-bold-theme .footer-nav-title,
+.dark-bold-theme .footer-social-title {
+    color: var(--color-foreground);
+}
+
+.dark-bold-theme .footer-description,
+.dark-bold-theme .footer-contact-item,
+.dark-bold-theme .footer-nav-link,
+.dark-bold-theme .footer-copyright,
+.dark-bold-theme .footer-credits {
+    color: #b5b5b5;
+}
+
+.dark-bold-theme .footer-nav-link,
+.dark-bold-theme .footer-contact-item a,
+.dark-bold-theme .footer-credits a,
+.dark-bold-theme .footer-social-link {
+    text-decoration: none;
+    border-bottom: 0;
+}
+
+/* Readability overrides for muted header sections and portfolio filters */
+.dark-bold-theme .section-muted,
+.dark-bold-theme .portfolio-header,
+.dark-bold-theme .blog-header,
+.dark-bold-theme .contact-header,
+.dark-bold-theme .post-header {
+    background: #141414;
+}
+
+.dark-bold-theme .portfolio-description,
+.dark-bold-theme .blog-description,
+.dark-bold-theme .contact-description,
+.dark-bold-theme .section-description {
+    color: #d0d0d0;
+}
+
+.dark-bold-theme .filter-btn {
+    background: #181818;
+    color: #f3f3f3;
+    border: 1px solid #4b4b4b;
+}
+
+.dark-bold-theme .filter-btn:hover {
+    border-color: var(--color-accent);
+    color: #ffffff;
+}
+
+.dark-bold-theme .filter-btn.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #111111;
+}

@@ -1,0 +1,31 @@
+{
+  "name": "mujuryoku",
+  "version": "1.0.0",
+  "description": "Mujuryoku - A modern, themeable 11ty starter kit for photographers",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "dev": "npx @11ty/eleventy --serve --watch",
+    "debug": "DEBUG=Eleventy* npx @11ty/eleventy",
+    "clean": "rm -rf _site",
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [
+    "11ty",
+    "eleventy",
+    "photography",
+    "portfolio",
+    "starter-kit"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.0",
+    "@11ty/eleventy-img": "^3.1.0",
+    "@11ty/eleventy-navigation": "^0.3.5",
+    "sass": "^1.69.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0"
+  }
+}

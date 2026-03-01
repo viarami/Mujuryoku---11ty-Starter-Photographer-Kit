@@ -1,0 +1,209 @@
+---
+title: Contact
+layout: base.njk
+eleventyNavigation:
+  key: Contact
+  order: 4
+---
+
+{% block content %}
+    <section class="contact-header section">
+        <div class="container">
+            <h1 class="contact-title">Get in Touch</h1>
+            <p class="contact-description">Have a project in mind? I'd love to hear about it. Let's create something beautiful together.</p>
+        </div>
+    </section>
+
+    <section class="contact-content section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-details">
+                        <h2 class="contact-section-title">Contact Information</h2>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <h3 class="contact-label">Email</h3>
+                                <a href="mailto:{{ metadata.contact.email }}" class="contact-link">{{ metadata.contact.email }}</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <h3 class="contact-label">Phone</h3>
+                                <a href="tel:{{ metadata.contact.phone }}" class="contact-link">{{ metadata.contact.phone }}</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <h3 class="contact-label">Location</h3>
+                                <p class="contact-address">{{ metadata.contact.address }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-social">
+                        <h3 class="contact-section-title">Follow Me</h3>
+                        <div class="social-links">
+                            {% if metadata.social.instagram %}
+                                <a href="{{ metadata.social.instagram }}" class="social-link" target="_blank" rel="noopener" aria-label="Instagram">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                    </svg>
+                                    <span>Instagram</span>
+                                </a>
+                            {% endif %}
+
+                            {% if metadata.social.twitter %}
+                                <a href="{{ metadata.social.twitter }}" class="social-link" target="_blank" rel="noopener" aria-label="Twitter">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                                    </svg>
+                                    <span>Twitter</span>
+                                </a>
+                            {% endif %}
+
+                            {% if metadata.social.facebook %}
+                                <a href="{{ metadata.social.facebook }}" class="social-link" target="_blank" rel="noopener" aria-label="Facebook">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                    </svg>
+                                    <span>Facebook</span>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper">
+                    <h2 class="contact-section-title">Send a Message</h2>
+
+                    <form class="contact-form" id="contact-form" action="{{ metadata.forms.contactAction }}" method="POST">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name *</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="tel" id="phone" name="phone" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Subject *</label>
+                            <select id="subject" name="subject" class="form-select" required>
+                                <option value="">Select a subject</option>
+                                <option value="portrait">Portrait Session</option>
+                                <option value="event">Event Photography</option>
+                                <option value="commercial">Commercial Project</option>
+                                <option value="wedding">Wedding Photography</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea id="message" name="message" class="form-textarea" rows="5" required placeholder="Tell me about your project..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                    </form>
+
+                    <div class="form-success" id="form-success" style="display: none;">
+                        <div class="success-content">
+                            <div class="success-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <h3 class="success-title">Message Sent!</h3>
+                            <p class="success-description">Thank you for reaching out. I'll get back to you as soon as possible.</p>
+                            <button type="button" class="btn btn-outline" id="reset-form">Send Another Message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('contact-form');
+            const formSuccess = document.getElementById('form-success');
+            const resetButton = document.getElementById('reset-form');
+
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    const formAction = form.getAttribute('action') || '';
+                    if (formAction.includes('YOUR_FORM_ID')) {
+                        alert('Set metadata.forms.contactAction in src/_data/metadata.js to your Formspree endpoint before submitting this form.');
+                        return;
+                    }
+
+                    // Get form data
+                    const formData = new FormData(form);
+
+                    // Submit form using fetch
+                    fetch(formAction, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                // Show success message
+                                form.style.display = 'none';
+                                formSuccess.style.display = 'block';
+
+                                // Reset form
+                                form.reset();
+                            } else {
+                                throw new Error('Form submission failed');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('There was an error sending your message. Please try again or contact us directly.');
+                        });
+                });
+            }
+
+            if (resetButton) {
+                resetButton.addEventListener('click', function () {
+                    formSuccess.style.display = 'none';
+                    form.style.display = 'block';
+                });
+            }
+        });
+    </script>
+{% endblock %}

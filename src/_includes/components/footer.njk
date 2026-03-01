@@ -1,0 +1,159 @@
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section footer-info">
+                <h3 class="footer-title">{{ metadata.title }}</h3>
+                <p class="footer-description">{{ metadata.description }}</p>
+
+                <div class="footer-contact">
+                    <p class="footer-contact-item">
+                        <a href="mailto:{{ metadata.email }}">{{ metadata.email }}</a>
+                    </p>
+                    <p class="footer-contact-item">
+                        {{ metadata.contact.phone }}
+                    </p>
+                    <p class="footer-contact-item">
+                        {{ metadata.contact.address }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-section footer-nav">
+                <h4 class="footer-nav-title">Quick Links</h4>
+                <ul class="footer-nav-list">
+                    {% for item in collections.all | eleventyNavigation %}
+                        <li class="footer-nav-item">
+                            <a href="{{ item.url | url }}" class="footer-nav-link">{{ item.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="footer-section footer-social">
+                <h4 class="footer-social-title">Follow</h4>
+                <div class="footer-social-links">
+                    {% if metadata.social.instagram %}
+                        <a href="{{ metadata.social.instagram }}" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                    {% endif %}
+
+                    {% if metadata.social.twitter %}
+                        <a href="{{ metadata.social.twitter }}" class="footer-social-link" aria-label="Twitter" target="_blank" rel="noopener">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                            </svg>
+                        </a>
+                    {% endif %}
+
+                    {% if metadata.social.facebook %}
+                        <a href="{{ metadata.social.facebook }}" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                    {% endif %}
+
+                    {% if metadata.social.pinterest %}
+                        <a href="{{ metadata.social.pinterest }}" class="footer-social-link" aria-label="Pinterest" target="_blank" rel="noopener">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M8 12a4 4 0 1 0 8 0 4 4 0 1 0-8 0"></path>
+                                <path d="M12 2v2"></path>
+                                <path d="M12 20v2"></path>
+                                <path d="M4.93 4.93l1.41 1.41"></path>
+                                <path d="M17.66 17.66l1.41 1.41"></path>
+                                <path d="M2 12h2"></path>
+                                <path d="M20 12h2"></path>
+                                <path d="M6.34 17.66l-1.41 1.41"></path>
+                                <path d="M19.07 4.93l-1.41 1.41"></path>
+                            </svg>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copyright">
+                &copy; {{ site.buildTime.getFullYear() }}
+                {{ metadata.title }}. All rights reserved.
+            </p>
+            <p class="footer-credits">
+        Built with <a href="https://www.11ty.dev/" target="_blank" rel="noopener">11ty</a> and <a href="https://github.com/viarami/mujuryoku" target="_blank" rel="noopener">Mujuryoku</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const mainNav = document.getElementById('main-nav');
+        const desktopBreakpoint = 900;
+
+        const closeMobileMenu = () => {
+            menuButton
+                .classList
+                .remove('active');
+            mobileMenu
+                .classList
+                .remove('active');
+            mobileMenuOverlay
+                .classList
+                .remove('active');
+            document
+                .body
+                .classList
+                .remove('menu-open');
+            menuButton.setAttribute('aria-expanded', false);
+        };
+
+        if (menuButton && mobileMenu) {
+            menuButton.addEventListener('click', function () {
+                const isOpen = menuButton
+                    .classList
+                    .toggle('active');
+                mobileMenu
+                    .classList
+                    .toggle('active', isOpen);
+                mobileMenuOverlay
+                    .classList
+                    .toggle('active', isOpen);
+                document
+                    .body
+                    .classList
+                    .toggle('menu-open', isOpen);
+                menuButton.setAttribute('aria-expanded', isOpen);
+            });
+
+            // Close menu when clicking overlay
+            mobileMenuOverlay.addEventListener('click', function () {
+                closeMobileMenu();
+            });
+
+            // Close menu when clicking on links
+            mobileMenu
+                .querySelectorAll('a')
+                .forEach(link => {
+                    link.addEventListener('click', function () {
+                        closeMobileMenu();
+                    });
+                });
+
+            // Ensure menu cannot stay open when resizing back to desktop.
+            const handleResize = () => {
+                if (window.innerWidth > desktopBreakpoint) {
+                    closeMobileMenu();
+                }
+            };
+            window.addEventListener('resize', handleResize);
+            handleResize();
+        }
+    });
+</script>

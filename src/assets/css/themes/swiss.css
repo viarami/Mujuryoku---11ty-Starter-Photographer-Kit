@@ -1,0 +1,313 @@
+/* Swiss Style CSS - International Typographic Style */
+.swiss-theme {
+    --font-family-primary: "Avenir Next", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-family-secondary: var(--font-family-primary);
+
+    /* Colors */
+    --color-background: #fcfbf8;
+    --color-foreground: #121722;
+    --color-muted: #eef1f6;
+    --color-muted-foreground: #4f5f73;
+    --color-accent: #e94f1f;
+    --color-accent-foreground: #ffffff;
+    --color-border: #111827;
+    --color-input: #f4f6fa;
+    --color-card: #ffffff;
+    --color-primary: var(--color-foreground);
+
+    /* Typography */
+    --text-sm: clamp(0.82rem, 0.77rem + 0.24vw, 0.96rem);
+    --text-sm: clamp(0.82rem, 0.77rem + 0.24cqw, 0.96rem);
+    --text-base: clamp(1rem, 0.95rem + 0.26vw, 1.12rem);
+    --text-base: clamp(1rem, 0.95rem + 0.26cqw, 1.12rem);
+    --text-lg: clamp(1.14rem, 1.04rem + 0.44vw, 1.34rem);
+    --text-lg: clamp(1.14rem, 1.04rem + 0.44cqw, 1.34rem);
+    --text-xl: clamp(1.28rem, 1.14rem + 0.72vw, 1.72rem);
+    --text-xl: clamp(1.28rem, 1.14rem + 0.72cqw, 1.72rem);
+    --text-2xl: clamp(1.58rem, 1.35rem + 1.1vw, 2.22rem);
+    --text-2xl: clamp(1.58rem, 1.35rem + 1.1cqw, 2.22rem);
+    --text-3xl: clamp(1.9rem, 1.55rem + 1.65vw, 2.9rem);
+    --text-3xl: clamp(1.9rem, 1.55rem + 1.65cqw, 2.9rem);
+    --text-4xl: clamp(2.32rem, 1.8rem + 2.5vw, 3.8rem);
+    --text-4xl: clamp(2.32rem, 1.8rem + 2.5cqw, 3.8rem);
+    --text-5xl: clamp(2.76rem, 2.06rem + 3.4vw, 4.9rem);
+    --text-5xl: clamp(2.76rem, 2.06rem + 3.4cqw, 4.9rem);
+    --text-6xl: clamp(3.15rem, 2.3rem + 4.2vw, 5.8rem);
+    --text-6xl: clamp(3.15rem, 2.3rem + 4.2cqw, 5.8rem);
+    --text-7xl: clamp(3.55rem, 2.48rem + 5.2vw, 6.9rem);
+    --text-7xl: clamp(3.55rem, 2.48rem + 5.2cqw, 6.9rem);
+    --text-8xl: clamp(4.2rem, 2.95rem + 6.1vw, 8rem);
+    --text-8xl: clamp(4.2rem, 2.95rem + 6.1cqw, 8rem);
+    --text-9xl: clamp(4.95rem, 3.35rem + 7.9vw, 10rem);
+    --text-9xl: clamp(4.95rem, 3.35rem + 7.9cqw, 10rem);
+
+    /* Spacing */
+    --spacing-0: 0;
+    --spacing-1: clamp(0.25rem, 0.22rem + 0.1vw, 0.32rem);
+    --spacing-1: clamp(0.25rem, 0.22rem + 0.1cqw, 0.32rem);
+    --spacing-2: clamp(0.45rem, 0.4rem + 0.22vw, 0.62rem);
+    --spacing-2: clamp(0.45rem, 0.4rem + 0.22cqw, 0.62rem);
+    --spacing-3: clamp(0.68rem, 0.6rem + 0.3vw, 0.9rem);
+    --spacing-3: clamp(0.68rem, 0.6rem + 0.3cqw, 0.9rem);
+    --spacing-4: clamp(0.9rem, 0.75rem + 0.55vw, 1.3rem);
+    --spacing-4: clamp(0.9rem, 0.75rem + 0.55cqw, 1.3rem);
+    --spacing-5: clamp(1.1rem, 0.92rem + 0.7vw, 1.6rem);
+    --spacing-5: clamp(1.1rem, 0.92rem + 0.7cqw, 1.6rem);
+    --spacing-6: clamp(1.3rem, 1.05rem + 0.85vw, 1.9rem);
+    --spacing-6: clamp(1.3rem, 1.05rem + 0.85cqw, 1.9rem);
+    --spacing-8: clamp(1.8rem, 1.4rem + 1.4vw, 2.8rem);
+    --spacing-8: clamp(1.8rem, 1.4rem + 1.4cqw, 2.8rem);
+    --spacing-10: clamp(2.2rem, 1.7rem + 1.8vw, 3.3rem);
+    --spacing-10: clamp(2.2rem, 1.7rem + 1.8cqw, 3.3rem);
+    --spacing-12: clamp(2.7rem, 2rem + 2.2vw, 4rem);
+    --spacing-12: clamp(2.7rem, 2rem + 2.2cqw, 4rem);
+    --spacing-16: clamp(3.6rem, 2.7rem + 3vw, 5.4rem);
+    --spacing-16: clamp(3.6rem, 2.7rem + 3cqw, 5.4rem);
+    --spacing-20: clamp(4.4rem, 3.25rem + 3.9vw, 6.8rem);
+    --spacing-20: clamp(4.4rem, 3.25rem + 3.9cqw, 6.8rem);
+    --spacing-24: clamp(5.2rem, 3.8rem + 4.8vw, 8.2rem);
+    --spacing-24: clamp(5.2rem, 3.8rem + 4.8cqw, 8.2rem);
+
+    /* Borders */
+    --radius: 0px;
+    /* No rounded corners */
+    --border-width: 2px;
+    --border-width-thick: 4px;
+
+    /* Shadows - No traditional shadows */
+    --shadow: none;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+
+    /* Transitions */
+    --transition: 200ms ease-out;
+    --transition-fast: 150ms ease-linear;
+}
+
+body.swiss-theme {
+    font-family: var(--font-family-primary);
+    background-color: var(--color-background);
+    background-image: linear-gradient(180deg, #fffdfa 0%, #f6f8fb 100%);
+    color: var(--color-foreground);
+    line-height: 1.62;
+    letter-spacing: 0.008em;
+}
+
+/* Typography */
+.swiss-theme h1 {
+    font-size: var(--text-7xl);
+    font-weight: 850;
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+    text-transform: uppercase;
+}
+
+.swiss-theme h2 {
+    font-size: var(--text-5xl);
+    font-weight: 820;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+    text-transform: uppercase;
+}
+
+.swiss-theme h3 {
+    font-size: var(--text-3xl);
+    font-weight: 760;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    text-transform: uppercase;
+}
+
+.swiss-theme p {
+    font-size: var(--text-base);
+    line-height: 1.74;
+    color: var(--color-muted-foreground);
+}
+
+/* Buttons */
+.swiss-theme .btn {
+    font-family: var(--font-family-primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: var(--radius);
+    border: var(--border-width) solid var(--color-border);
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+    padding: var(--spacing-3) var(--spacing-6);
+    font-size: var(--text-sm);
+    transition: all var(--transition);
+}
+
+.swiss-theme .btn:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-background);
+    transform: translateY(-1px);
+}
+
+.swiss-theme .btn-outline {
+    background-color: transparent;
+    color: var(--color-foreground);
+    border: var(--border-width) solid var(--color-border);
+}
+
+.swiss-theme .btn-outline:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-accent-foreground);
+}
+
+/* Cards */
+.swiss-theme .card {
+    background-color: var(--color-card);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--spacing-6);
+    transition: all var(--transition);
+}
+
+.swiss-theme .card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+/* Links */
+.swiss-theme a {
+    color: var(--color-accent);
+    text-decoration: none;
+    position: relative;
+    transition: color var(--transition);
+}
+
+.swiss-theme a:hover {
+    color: #bb340f;
+}
+
+/* Navigation */
+.swiss-theme .nav-link {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-size: var(--text-sm);
+    padding: var(--spacing-2) var(--spacing-4);
+    border: var(--border-width) solid transparent;
+    transition: all var(--transition);
+}
+
+.swiss-theme .nav-link:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+.swiss-theme .header {
+    background: rgba(252, 251, 248, 0.94);
+    border-bottom: 1px solid rgba(17, 24, 39, 0.14);
+}
+
+.swiss-theme .logo-text {
+    letter-spacing: -0.04em;
+}
+
+.swiss-theme .mobile-nav-link {
+    color: var(--color-foreground);
+    text-decoration: none;
+    border-bottom: 0;
+}
+
+.swiss-theme .footer {
+    background: rgba(255, 253, 250, 0.88);
+    border-top: 1px solid rgba(17, 24, 39, 0.16);
+}
+
+.swiss-theme .footer-title,
+.swiss-theme .footer-nav-title,
+.swiss-theme .footer-social-title {
+    color: var(--color-foreground);
+}
+
+.swiss-theme .footer-description,
+.swiss-theme .footer-contact-item,
+.swiss-theme .footer-nav-link,
+.swiss-theme .footer-copyright,
+.swiss-theme .footer-credits {
+    color: var(--color-muted-foreground);
+}
+
+.swiss-theme .footer-nav-link,
+.swiss-theme .footer-contact-item a,
+.swiss-theme .footer-credits a,
+.swiss-theme .footer-social-link {
+    text-decoration: none;
+    border-bottom: 0;
+}
+
+/* Section styles */
+.swiss-theme .section {
+    padding: var(--spacing-24) 0;
+    position: relative;
+}
+
+.swiss-theme .section-title {
+    margin-bottom: var(--spacing-6);
+    max-width: 16ch;
+    position: relative;
+}
+
+.swiss-theme .section-title::before {
+    content: "□";
+    position: absolute;
+    top: clamp(-1.2rem, -0.75rem - 0.8vw, -0.5rem);
+    top: clamp(-1.2rem, -0.75rem - 0.8cqw, -0.5rem);
+    left: 0;
+    color: var(--color-accent);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.swiss-theme .hero-description,
+.swiss-theme .section-description,
+.swiss-theme .services-description,
+.swiss-theme .pricing-description {
+    color: var(--color-muted-foreground);
+}
+
+/* Grid patterns */
+.swiss-theme .swiss-grid-pattern {
+    background-image: linear-gradient(0deg,
+            transparent 48%,
+            rgba(0, 0, 0, 0.03) 48%,
+            rgba(0, 0, 0, 0.03) 52%,
+            transparent 52%),
+        linear-gradient(90deg,
+            transparent 48%,
+            rgba(0, 0, 0, 0.03) 48%,
+            rgba(0, 0, 0, 0.03) 52%,
+            transparent 52%);
+    background-size: 24px 24px;
+}
+
+/* Swiss dots pattern */
+.swiss-theme .swiss-dots {
+    background-image: radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    background-size: 16px 16px;
+}
+
+/* Diagonal lines pattern */
+.swiss-theme .swiss-diagonal {
+    background-image: repeating-linear-gradient(45deg,
+            transparent,
+            transparent 10px,
+            rgba(0, 0, 0, 0.02) 10px,
+            rgba(0, 0, 0, 0.02) 20px);
+}
+
+/* Noise texture */
+.swiss-theme .swiss-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.015;
+}

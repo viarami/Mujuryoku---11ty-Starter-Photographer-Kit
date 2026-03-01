@@ -1,0 +1,77 @@
+{% macro serviceCard(service) %}
+    <div class="service-card{% if service.reverse %} service-card-reverse{% endif %}">
+        <div class="service-image">
+            {% if service.image %}
+                <img src="{{ service.image }}" alt="{{ service.imageAlt or service.title }}" loading="lazy" decoding="async">
+            {% else %}
+                <div class="service-image-placeholder">
+                    <span>{{ service.imageLabel }}</span>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="service-content">
+            <h2 class="service-title">{{ service.title }}</h2>
+            <p class="service-description">{{ service.description }}</p>
+
+            <h3 class="service-subtitle">What's Included</h3>
+            <ul class="service-features">
+                {% for item in service.included %}
+                    <li class="service-feature">{{ item }}</li>
+                {% endfor %}
+            </ul>
+
+            <h3 class="service-subtitle">Perfect For</h3>
+            <ul class="service-use-cases">
+                {% for useCase in service.perfectFor %}
+                    <li>{{ useCase }}</li>
+                {% endfor %}
+            </ul>
+
+            <div class="service-cta">
+                {% for action in service.actions %}
+                    <a href="{{ action.href }}" class="btn btn-{{ action.variant }}">{{ action.label }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro processStep(step, index) %}
+    <div class="process-step">
+        <div class="process-number">{{ index + 1 }}</div>
+        <h3 class="process-title">{{ step.title }}</h3>
+        <p class="process-description">{{ step.description }}</p>
+    </div>
+{% endmacro %}
+
+{% macro pricingPackageCard(package) %}
+    <div class="pricing-card card{% if package.featured %} featured{% endif %}">
+        {% if package.badge %}
+            <div class="pricing-badge">{{ package.badge }}</div>
+        {% endif %}
+
+        <div class="pricing-header">
+            <h3 class="pricing-tier">{{ package.tier }}</h3>
+            <div class="pricing-price">
+                <span class="price-amount">{{ package.price }}</span>
+                <span class="price-duration">{{ package.duration }}</span>
+            </div>
+        </div>
+
+        <ul class="pricing-features">
+            {% for feature in package.features %}
+                <li class="pricing-feature{% if feature.included == false %} not-included{% endif %}">{{ feature.text }}</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ package.cta.href }}" class="btn btn-primary btn-full">{{ package.cta.label }}</a>
+    </div>
+{% endmacro %}
+
+{% macro faqItem(item) %}
+    <div class="faq-item">
+        <h3 class="faq-question">{{ item.question }}</h3>
+        <p class="faq-answer">{{ item.answer }}</p>
+    </div>
+{% endmacro %}

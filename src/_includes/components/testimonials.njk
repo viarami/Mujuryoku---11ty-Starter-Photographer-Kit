@@ -1,0 +1,134 @@
+{#
+Testimonial Carousel Component
+Features:
+- Auto-rotation with configurable interval
+- Manual navigation (previous/next buttons)
+- Dot indicators for current slide
+- Smooth CSS transitions between slides
+- Pause on hover functionality
+- Accessible (keyboard navigation, ARIA labels)
+- Graceful degradation (shows all testimonials in grid if JavaScript fails)
+#}
+
+{% set testimonials = [
+    {
+        name: "Sarah Johnson",
+        role: "Wedding Client",
+        company: "Private",
+        quote: "The photos exceeded all my expectations. Professional, creative, and truly captured the essence of our special day.",
+        avatar: "SJ"
+    },
+    {
+        name: "Michael Chen",
+        role: "Event Coordinator",
+        company: "TechCorp Events",
+        quote: "Outstanding work on our corporate event. Every important moment was captured beautifully.",
+        avatar: "MC"
+    },
+    {
+        name: "Emma Davis",
+        role: "Marketing Director",
+        company: "Brand Solutions",
+        quote: "Incredible attention to detail. The portraits perfectly represent our brand identity.",
+        avatar: "ED"
+    },
+    {
+        name: "James Williams",
+        role: "Business Owner",
+        company: "Williams Studio",
+        quote: "Working together was an absolute pleasure. The final gallery was beyond what I imagined.",
+        avatar: "JW"
+    },
+    {
+        name: "Lisa Anderson",
+        role: "Model & Influencer",
+        company: "Self-employed",
+        quote: "The most professional photoshoot experience I've ever had. Truly talented and creative.",
+        avatar: "LA"
+    },
+    {
+        name: "Robert Martinez",
+        role: "Art Director",
+        company: "Creative Agency",
+        quote: "Exceptional vision and technical skill. Delivered exactly what we needed for our campaign.",
+        avatar: "RM"
+    }
+] %}
+
+<div class="testimonial-carousel" 
+     data-autoplay="true" 
+     data-interval="5000" 
+     role="region" 
+     aria-label="Testimonials carousel"
+     id="testimonial-carousel">
+
+    <!-- Carousel Container -->
+    <div class="carousel-container">
+        <div class="carousel-track" role="list">
+            {% for testimonial in testimonials %}
+                <div class="carousel-slide" role="listitem" data-index="{{ loop.index0 }}">
+                    <div class="testimonial-card card">
+                        <blockquote class="testimonial-quote">
+                            <svg class="quote-icon" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                            </svg>
+                            <p>"{{ testimonial.quote }}"</p>
+                        </blockquote>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar" aria-hidden="true">
+                                {{ testimonial.avatar }}
+                            </div>
+                            <cite class="testimonial-author-info">
+                                <span class="testimonial-name">{{ testimonial.name }}</span>
+                                <span class="testimonial-role">{{ testimonial.role }}
+                                    {% if testimonial.company %}, {{ testimonial.company }}
+                                    {% endif %}
+                                </span>
+                            </cite>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <button class="carousel-button carousel-button-prev" aria-label="Previous testimonial" id="carousel-prev">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </button>
+    <button class="carousel-button carousel-button-next" aria-label="Next testimonial" id="carousel-next">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </button>
+
+    <!-- Dot Indicators -->
+    <div class="carousel-dots" role="tablist" aria-label="Testimonial navigation">
+        {% for testimonial in testimonials %}
+            <button class="carousel-dot" 
+                role="tab" 
+                aria-selected="{% if loop.index0 == 0 %}true{% else %}false{% endif %}" 
+                aria-label="Go to testimonial {{ loop.index }}"
+                data-index="{{ loop.index0 }}"></button>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- No-JS Fallback: Show all testimonials in grid -->
+<noscript>
+    <div class="testimonials-grid">
+        {% for testimonial in testimonials %}
+            <div class="testimonial-card card">
+                <blockquote class="testimonial-quote">
+                "{{ testimonial.quote }}"
+            </blockquote>
+                <cite class="testimonial-author">{{ testimonial.name }}, {{ testimonial.role }}
+                    {% if testimonial.company %}, {{ testimonial.company }}
+                    {% endif %}
+                </cite>
+            </div>
+        {% endfor %}
+    </div>
+</noscript>

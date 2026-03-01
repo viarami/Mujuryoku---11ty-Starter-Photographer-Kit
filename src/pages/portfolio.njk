@@ -1,0 +1,220 @@
+---
+title: Portfolio
+layout: base.njk
+eleventyNavigation:
+  key: Portfolio
+  order: 2
+---
+
+<section class="portfolio-header section">
+    <div class="container">
+        <h1 class="portfolio-title">Portfolio</h1>
+        <p class="portfolio-description">A curated collection of my best work across various photography genres.</p>
+
+        <!-- Filter buttons -->
+        <div class="portfolio-filters">
+            {% for category in portfolio.categories %}
+                <button class="filter-btn{% if category.slug == 'all' %} active{% endif %}" data-filter="{{ category.slug }}">
+                    {{ category.label }}
+                </button>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="portfolio-gallery section">
+    <div class="container">
+        <div class="portfolio-grid">
+            {% for item in portfolio.items %}
+                <div class="portfolio-item" data-category="{{ item.category }}" data-index="{{ loop.index0 }}">
+                    <a href="#" class="portfolio-link" data-index="{{ loop.index0 }}" data-src="{{ item.image }}">
+                        <img src="{{ item.image }}"
+                                 alt="{{ item.title }}"
+                                 loading="lazy" 
+                                 decoding="async"
+                                 class="gallery-image"
+                                 data-index="{{ loop.index0 }}">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-item-title">{{ item.title }}</span>
+                            <span class="portfolio-item-category">{{ item.description }}</span>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Close lightbox">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+    </button>
+
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous image">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </button>
+
+    <button class="lightbox-nav lightbox-next" aria-label="Next image">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </button>
+
+    <div class="lightbox-content">
+        <img src="" alt="" class="lightbox-image">
+        <div class="lightbox-caption">
+            <h3 class="lightbox-title"></h3>
+            <p class="lightbox-description"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Portfolio filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const filter = this.getAttribute('data-filter');
+
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this
+                    .classList
+                    .add('active');
+
+                // Filter items
+                portfolioItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+
+                    if (filter === 'all' || category === filter) {
+                        item.style.display = 'block';
+                        item
+                            .classList
+                            .add('fade-in');
+                    } else {
+                        item.style.display = 'none';
+                        item
+                            .classList
+                            .remove('fade-in');
+                    }
+                });
+            });
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.querySelector('.lightbox-image');
+        const lightboxTitle = document.querySelector('.lightbox-title');
+        const lightboxDescription = document.querySelector('.lightbox-description');
+        const closeBtn = document.querySelector('.lightbox-close');
+        const prevBtn = document.querySelector('.lightbox-prev');
+        const nextBtn = document.querySelector('.lightbox-next');
+
+        let currentIndex = 0;
+        const items = Array.from(portfolioItems);
+
+        // Open lightbox
+        document
+            .querySelectorAll('.portfolio-link')
+            .forEach((link, index) => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const item = this.closest('.portfolio-item');
+                    currentIndex = items.indexOf(item);
+                    openLightbox(currentIndex);
+                });
+            });
+
+        function openLightbox(index) {
+            const item = items[index];
+            const img = item.querySelector('img');
+            const link = item.querySelector('.portfolio-link');
+            const title = item
+                .querySelector('.portfolio-item-title')
+                .textContent;
+            const category = item
+                .querySelector('.portfolio-item-category')
+                .textContent;
+
+            // Get original image source from data attribute or fallback to img src
+            const originalSrc = link.getAttribute('data-src') || img.src;
+
+            // Use the highest resolution available for lightbox
+            // Try to get the src from the largest JPEG source if using picture element
+            const sources = img
+                .parentElement
+                .querySelectorAll('source');
+            let highResSrc = originalSrc;
+
+            // If we have sources, construct the high-res URL (2000px width)
+            if (sources.length > 0) {
+                const baseName = originalSrc
+                    .replace('/assets/images/', '')
+                    .replace('.jpg', '');
+                highResSrc = `/assets/images/optimized/${baseName}-2000.jpeg`;
+            }
+
+            lightboxImage.src = highResSrc;
+            lightboxImage.alt = img.alt || title;
+            lightboxTitle.textContent = title;
+            lightboxDescription.textContent = category;
+
+            lightbox
+                .classList
+                .add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox
+                .classList
+                .remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function showNext() {
+            currentIndex = (currentIndex + 1) % items.length;
+            openLightbox(currentIndex);
+        }
+
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            openLightbox(currentIndex);
+        }
+
+        // Event listeners
+        closeBtn.addEventListener('click', closeLightbox);
+        prevBtn.addEventListener('click', showPrev);
+        nextBtn.addEventListener('click', showNext);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function (e) {
+            if (!lightbox.classList.contains('active')) 
+                return;
+            
+            if (e.key === 'Escape') 
+                closeLightbox();
+            if (e.key === 'ArrowLeft') 
+                showPrev();
+            if (e.key === 'ArrowRight') 
+                showNext();
+            }
+        );
+
+        // Close on background click
+        lightbox.addEventListener('click', function (e) {
+            if (e.target === lightbox) 
+                closeLightbox();
+            }
+        );
+    });
+</script>
