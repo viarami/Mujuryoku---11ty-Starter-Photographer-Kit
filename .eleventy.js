@@ -105,26 +105,71 @@ module.exports = function (eleventyConfig) {
 
   // Default image options for responsive images
   const defaultImageOptions = {
-    widths: [300, 600, 900, 1200, 1600, 2000],
-    formats: ["avif", "webp", "jpeg"],
+    widths: [400, 800, 1200, 1600],
+    formats: ["avif"],
     outputDir: "_site/assets/images/optimized",
     urlPath: "/assets/images/optimized/",
     sharpOptions: {
       animated: true,
     },
-    sharpWebpOptions: {
-      quality: 80,
-      effort: 4,
-    },
     sharpAvifOptions: {
       quality: 75,
       effort: 4,
     },
-    sharpJpegOptions: {
-      quality: 80,
-      progressive: true,
-    },
   };
+
+  function getImageProcessingOptions(overrides = {}) {
+    const imageOptions = { ...defaultImageOptions };
+
+    if (Array.isArray(overrides.widths) && overrides.widths.length > 0) {
+      imageOptions.widths = overrides.widths;
+    }
+
+    if (Array.isArray(overrides.formats) && overrides.formats.length > 0) {
+      imageOptions.formats = overrides.formats;
+    }
+
+    return imageOptions;
+  }
+
+  function buildHtmlAttributes(attributes = {}) {
+    return Object.entries(attributes)
+      .filter(([, value]) => value !== undefined && value !== null && value !== "")
+      .map(([key, value]) => `${key}="${escapeHtml(String(value))}"`)
+      .join(" ");
+  }
+
+  function renderFallbackImage(src, attributes = {}) {
+    return `<img ${buildHtmlAttributes({ src, ...attributes })}>`;
+  }
+
+  function renderAvifPicture(metadata, fallbackSrc, attributes = {}) {
+    const avifEntries = Array.isArray(metadata.avif) ? metadata.avif : [];
+    if (avifEntries.length === 0) {
+      return renderFallbackImage(fallbackSrc, attributes);
+    }
+
+    const sortedEntries = [...avifEntries].sort((a, b) => a.width - b.width);
+    const srcset = sortedEntries
+      .map((entry) => `${entry.url} ${entry.width}w`)
+      .join(", ");
+    const largestEntry = sortedEntries[sortedEntries.length - 1];
+
+    const { sizes, ...imgAttributes } = attributes;
+    const fallbackAttributes = {
+      ...imgAttributes,
+      src: fallbackSrc || largestEntry.url,
+    };
+
+    if (largestEntry.width && largestEntry.height) {
+      fallbackAttributes.width = largestEntry.width;
+      fallbackAttributes.height = largestEntry.height;
+    }
+
+    return `<picture><source type="image/avif" srcset="${escapeHtml(srcset)}" sizes="${escapeHtml(
+      String(sizes || "100vw")
+    )}"><img ${buildHtmlAttributes(fallbackAttributes)}></picture>`;
+  }
 
   // Generic responsive image shortcode
   eleventyConfig.addNunjucksAsyncShortcode(
@@ -136,13 +181,18 @@ module.exports = function (eleventyConfig) {
       }
 
       const inputPath = resolveImageInputPath(src);
-      const imageOptions = { ...defaultImageOptions, ...options };
+      const imageOptions = getImageProcessingOptions(options);
 
       // Check if file exists
       if (!inputPath) {
         console.warn(`Image not found: ${src}`);
         // Return fallback
-        return `<img src="${src}" alt="${alt || ""}" loading="${options.loading || "lazy"}" decoding="async" class="${options.class || ""}">`;
+        return renderFallbackImage(src, {
+          alt: alt || "",
+          loading: options.loading || "lazy",
+          decoding: "async",
+          class: options.class || "",
+        });
       }
 
       try {
@@ -156,11 +206,16 @@ module.exports = function (eleventyConfig) {
           class: options.class || "",
         };
 
-        return Image.generateHTML(metadata, imageAttributes);
+        return renderAvifPicture(metadata, src, imageAttributes);
       } catch (error) {
         console.warn(`Error processing image ${src}:`, error.message);
         // Fallback to original image
-        return `<img src="${src}" alt="${alt || ""}" loading="${options.loading || "lazy"}" decoding="async" class="${options.class || ""}">`;
+        return renderFallbackImage(src, {
+          alt: alt || "",
+          loading: options.loading || "lazy",
+          decoding: "async",
+          class: options.class || "",
+        });
       }
     }
   );
@@ -176,14 +231,18 @@ module.exports = function (eleventyConfig) {
       // Check if file exists
       if (!inputPath) {
         console.warn(`Gallery image not found: ${src}`);
-        return `<img src="${src}" alt="${alt || ""}" loading="lazy" decoding="async" class="gallery-image" data-index="${index || ""}">`;
+        return renderFallbackImage(src, {
+          alt: alt || "",
+          loading: "lazy",
+          decoding: "async",
+          class: "gallery-image",
+          "data-index": index || "",
+        });
       }
 
-      const galleryOptions = {
-        ...defaultImageOptions,
+      const galleryOptions = getImageProcessingOptions({
         widths: [400, 800, 1200, 1600],
-        formats: ["avif", "webp", "jpeg"],
-      };
+      });
 
       try {
         let metadata = await Image(inputPath, galleryOptions);
@@ -197,10 +256,16 @@ module.exports = function (eleventyConfig) {
           "data-index": index || "",
         };
 
-        return Image.generateHTML(metadata, imageAttributes);
+        return renderAvifPicture(metadata, src, imageAttributes);
       } catch (error) {
         console.warn(`Error processing gallery image ${src}:`, error.message);
-        return `<img src="${src}" alt="${alt || ""}" loading="lazy" decoding="async" class="gallery-image" data-index="${index || ""}">`;
+        return renderFallbackImage(src, {
+          alt: alt || "",
+          loading: "lazy",
+          decoding: "async",
+          class: "gallery-image",
+          "data-index": index || "",
+        });
       }
     }
   );
@@ -216,14 +281,18 @@ module.exports = function (eleventyConfig) {
       // Check if file exists
       if (!inputPath) {
         console.warn(`Featured image not found: ${src}`);
-        return `<img src="${src}" alt="${alt || ""}" loading="eager" decoding="async" class="featured-image" fetchpriority="high">`;
+        return renderFallbackImage(src, {
+          alt: alt || "",
+          loading: "eager",
+          decoding: "async",
+          class: "featured-image",
+          fetchpriority: "high",
+        });
       }
 
-      const featuredOptions = {
-        ...defaultImageOptions,
+      const featuredOptions = getImageProcessingOptions({
         widths: [600, 1200, 1800, 2400],
-        formats: ["avif", "webp", "jpeg"],
-      };
+      });
 
       try {
         let metadata = await Image(inputPath, featuredOptions);
@@ -237,10 +306,16 @@ module.exports = function (eleventyConfig) {
           fetchpriority: "high",
         };
 
-        return Image.generateHTML(metadata, imageAttributes);
+        return renderAvifPicture(metadata, src, imageAttributes);
       } catch (error) {
         console.warn(`Error processing featured image ${src}:`, error.message);
-        return `<img src="${src}" alt="${alt || ""}" loading="eager" decoding="async" class="featured-image" fetchpriority="high">`;
+        return renderFallbackImage(src, {
+          alt: alt || "",
+          loading: "eager",
+          decoding: "async",
+          class: "featured-image",
+          fetchpriority: "high",
+        });
       }
     }
   );
@@ -256,14 +331,17 @@ module.exports = function (eleventyConfig) {
       // Check if file exists
       if (!inputPath) {
         console.warn(`Avatar image not found: ${src}`);
-        return `<img src="${src}" alt="${alt || ""}" loading="lazy" decoding="async" class="avatar-image">`;
+        return renderFallbackImage(src, {
+          alt: alt || "",
+          loading: "lazy",
+          decoding: "async",
+          class: "avatar-image",
+        });
       }
 
-      const avatarOptions = {
-        ...defaultImageOptions,
-        widths: [64, 128, 256],
-        formats: ["avif", "webp", "jpeg"],
-      };
+      const avatarOptions = getImageProcessingOptions({
+        widths: [64, 128, 192, 256],
+      });
 
       try {
         let metadata = await Image(inputPath, avatarOptions);
@@ -276,10 +354,15 @@ module.exports = function (eleventyConfig) {
           class: "avatar-image",
         };
 
-        return Image.generateHTML(metadata, imageAttributes);
+        return renderAvifPicture(metadata, src, imageAttributes);
       } catch (error) {
         console.warn(`Error processing avatar image ${src}:`, error.message);
-        return `<img src="${src}" alt="${alt || ""}" loading="lazy" decoding="async" class="avatar-image">`;
+        return renderFallbackImage(src, {
+          alt: alt || "",
+          loading: "lazy",
+          decoding: "async",
+          class: "avatar-image",
+        });
       }
     }
   );
@@ -298,20 +381,15 @@ module.exports = function (eleventyConfig) {
         return src;
       }
 
-      const lightboxOptions = {
-        ...defaultImageOptions,
-        widths: [800, 1600, 2400, 3200],
-        formats: ["avif", "webp", "jpeg"],
-      };
+      const lightboxOptions = getImageProcessingOptions({
+        widths: [800, 1200, 1600, 2400],
+      });
 
       try {
         let metadata = await Image(inputPath, lightboxOptions);
 
-        // Return the highest-res AVIF URL with fallback chain.
-        const highRes =
-          (metadata.avif && metadata.avif[metadata.avif.length - 1]) ||
-          (metadata.webp && metadata.webp[metadata.webp.length - 1]) ||
-          (metadata.jpeg && metadata.jpeg[metadata.jpeg.length - 1]);
+        // Return the highest-res AVIF URL.
+        const highRes = metadata.avif && metadata.avif[metadata.avif.length - 1];
         return highRes ? highRes.url : src;
       } catch (error) {
         console.warn(`Error processing lightbox image ${src}:`, error.message);
@@ -326,10 +404,15 @@ module.exports = function (eleventyConfig) {
     async function (src, alt, sizes, options = {}) {
       // Forward to responsiveImage
       const inputPath = resolveImageInputPath(src);
-      const imageOptions = { ...defaultImageOptions, ...options };
+      const imageOptions = getImageProcessingOptions(options);
 
       if (!inputPath) {
-        return `<img src="${src}" alt="${alt || ""}" loading="${options.loading || "lazy"}" decoding="async" class="${options.class || ""}" sizes="${sizes || "100vw"}">`;
+        return renderFallbackImage(src, {
+          alt: alt || "",
+          loading: options.loading || "lazy",
+          decoding: "async",
+          class: options.class || "",
+        });
       }
 
       try {
@@ -343,10 +426,15 @@ module.exports = function (eleventyConfig) {
           class: options.class || "",
         };
 
-        return Image.generateHTML(metadata, imageAttributes);
+        return renderAvifPicture(metadata, src, imageAttributes);
       } catch (error) {
         console.warn(`Error processing image ${src}:`, error.message);
-        return `<img src="${src}" alt="${alt || ""}" loading="${options.loading || "lazy"}" decoding="async" class="${options.class || ""}" sizes="${sizes || "100vw"}">`;
+        return renderFallbackImage(src, {
+          alt: alt || "",
+          loading: options.loading || "lazy",
+          decoding: "async",
+          class: options.class || "",
+        });
       }
     }
   );
